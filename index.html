@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>质量检测年度报告</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --border: rgba(255,255,255,0.07);
+    --oem: #38bdf8;
+    --bfl: #a78bfa;
+    --raw: #34d399;
+    --accent: #f59e0b;
+    --text: #e2e8f0;
+    --muted: #64748b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 32px 24px;
+  }
+  /* Background grid */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  header {
+    max-width: 1280px;
+    margin: 0 auto 36px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+    animation: fadeDown 0.6s ease both;
+  }
+  .header-left h1 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    background: linear-gradient(135deg, #e2e8f0, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .header-left p {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.08em;
+  }
+  .legend {
+    display: flex; gap: 20px;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 13px; color: var(--muted);
+  }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+
+  /* KPI cards */
+  .kpi-row {
+    max-width: 1280px;
+    margin: 0 auto 28px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 14px 14px 0 0;
+  }
+  .kpi-card.oem::before { background: var(--oem); }
+  .kpi-card.bfl::before { background: var(--bfl); }
+  .kpi-card.raw::before { background: var(--raw); }
+
+  .kpi-label { font-size: 12px; color: var(--muted); letter-spacing: 0.05em; margin-bottom: 10px; }
+  .kpi-row-data { display: flex; gap: 24px; }
+  .kpi-stat { }
+  .kpi-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 28px; font-weight: 500;
+  }
+  .kpi-card.oem .kpi-num { color: var(--oem); }
+  .kpi-card.bfl .kpi-num { color: var(--bfl); }
+  .kpi-card.raw .kpi-num { color: var(--raw); }
+  .kpi-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .kpi-divider { width: 1px; background: var(--border); }
+  .kpi-mini-num { font-family: 'DM Mono', monospace; font-size: 20px; color: var(--text); }
+  .kpi-mini-label { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+  /* Charts grid */
+  .charts-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+  }
+  .chart-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .chart-card.wide { grid-column: 1 / -1; }
+  .chart-card:nth-child(1) { animation-delay: 0.2s; }
+  .chart-card:nth-child(2) { animation-delay: 0.3s; }
+  .chart-card:nth-child(3) { animation-delay: 0.4s; }
+  .chart-card:nth-child(4) { animation-delay: 0.5s; }
+
+  .card-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .card-desc {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .chart-wrap { position: relative; }
+
+  /* Tab buttons */
+  .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+  .tab-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'Noto Sans SC', sans-serif;
+    transition: all 0.2s;
+  }
+  .tab-btn.active {
+    background: var(--surface2);
+    color: var(--text);
+    border-color: rgba(255,255,255,0.15);
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <h1>质量检测年度分析报告</h1>
+    <p>2025.03 — 2026.02 &nbsp;·&nbsp; OEM / 包辅料 / 原料产品</p>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--oem)"></div>OEM</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--bfl)"></div>包辅料</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--raw)"></div>原料产品</div>
+  </div>
+</header>
+
+<!-- KPI Cards -->
+<div class="kpi-row">
+  <div class="kpi-card oem">
+    <div class="kpi-label">OEM</div>
+    <div class="kpi-row-data">
+      <div class="kpi-stat">
+        <div class="kpi-num">92.73%</div>
+        <div class="kpi-sub">年度综合合格率</div>
+      </div>
+      <div class="kpi-divider"></div>
+      <div class="kpi-stat">
+        <div class="kpi-mini-num">24,720</div>
+        <div class="kpi-mini-label">总检测量</div>
+      </div>
+      <div class="kpi-stat">
+        <div class="kpi-mini-num">559</div>
+        <div class="kpi-mini-label">让步接收</div>
+      </div>
+    </div>
+  </div>
+  <div class="kpi-card bfl">
+    <div class="kpi-label">包辅料</div>
+    <div class="kpi-row-data">
+      <div class="kpi-stat">
+        <div class="kpi-num">93.82%</div>
+        <div class="kpi-sub">年度综合合格率</div>
+      </div>
+      <div class="kpi-divider"></div>
+      <div class="kpi-stat">
+        <div class="kpi-mini-num">26,337</div>
+        <div class="kpi-mini-label">总检测量</div>
+      </div>
+      <div class="kpi-stat">
+        <div class="kpi-mini-num">530</div>
+        <div class="kpi-mini-label">让步接收</div>
+      </div>
+    </div>
+  </div>
+  <div class="kpi-card raw">
+    <div class="kpi-label">原料产品</div>
+    <div class="kpi-row-data">
+      <div class="kpi-stat">
+        <div class="kpi-num">92.72%</div>
+        <div class="kpi-sub">年度综合合格率</div>
+      </div>
+      <div class="kpi-divider"></div>
+      <div class="kpi-stat">
+        <div class="kpi-mini-num">8,391</div>
+        <div class="kpi-mini-label">总检测量</div>
+      </div>
+      <div class="kpi-stat">
+        <div class="kpi-mini-num">191</div>
+        <div class="kpi-mini-label">让步接收</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Charts -->
+<div class="charts-grid">
+
+  <!-- Chart 1: 合格率趋势 -->
+  <div class="chart-card wide">
+    <div class="card-title">趋势分析</div>
+    <div class="card-desc">月度合格率走势对比</div>
+    <div class="chart-wrap" style="height:260px">
+      <canvas id="rateChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Chart 2: 月度检测量 -->
+  <div class="chart-card">
+    <div class="card-title">业务量</div>
+    <div class="card-desc">月度检测数量分布</div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchVol('all', this)">全部</button>
+      <button class="tab-btn" onclick="switchVol('oem', this)">OEM</button>
+      <button class="tab-btn" onclick="switchVol('bfl', this)">包辅料</button>
+      <button class="tab-btn" onclick="switchVol('raw', this)">原料</button>
+    </div>
+    <div class="chart-wrap" style="height:220px">
+      <canvas id="volChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Chart 3: 让步接收 -->
+  <div class="chart-card">
+    <div class="card-title">风险管控</div>
+    <div class="card-desc">让步接收月度累计</div>
+    <div class="chart-wrap" style="height:264px">
+      <canvas id="concessionChart"></canvas>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const months = ['25/3月','25/4月','25/5月','25/6月','25/7月','25/8月','25/9月','25/10月','25/11月','25/12月','26/1月','26/2月'];
+
+const data = {
+  oem: {
+    rate: [92.44,94.31,91.39,92.00,91.97,91.18,90.59,91.66,91.54,95.42,94.51,93.83],
+    vol:  [1785,2057,1985,1800,1756,2325,2285,1558,2117,3584,2949,519],
+    concession: [40,38,61,38,28,62,75,52,51,53,47,14],
+  },
+  bfl: {
+    rate: [95.72,95.31,93.29,92.59,90.29,91.93,90.71,91.27,93.01,95.31,94.81,94.53],
+    vol:  [444,874,864,634,752,2514,2100,1054,2847,8060,5554,640],
+    concession: [6,11,15,18,29,64,71,33,48,133,91,11],
+  },
+  raw: {
+    rate: [82.72,91.81,90.94,92.07,91.98,90.84,93.51,91.63,92.65,94.21,94.89,94.00],
+    vol:  [243,354,276,290,449,1114,817,490,1034,1762,1312,250],
+    concession: [14,12,9,7,4,26,22,16,22,31,20,8],
+  }
+};
+
+const gridColor = 'rgba(255,255,255,0.05)';
+const tickColor = '#64748b';
+
+Chart.defaults.font.family = "'DM Mono', monospace";
+Chart.defaults.font.size = 11;
+Chart.defaults.color = tickColor;
+
+// ---- Rate Chart ----
+const rateCtx = document.getElementById('rateChart').getContext('2d');
+new Chart(rateCtx, {
+  type: 'line',
+  data: {
+    labels: months,
+    datasets: [
+      {
+        label: 'OEM',
+        data: data.oem.rate,
+        borderColor: '#38bdf8',
+        backgroundColor: 'rgba(56,189,248,0.08)',
+        tension: 0.4,
+        fill: true,
+        pointRadius: 4,
+        pointHoverRadius: 7,
+        pointBackgroundColor: '#38bdf8',
+        borderWidth: 2,
+      },
+      {
+        label: '包辅料',
+        data: data.bfl.rate,
+        borderColor: '#a78bfa',
+        backgroundColor: 'rgba(167,139,250,0.08)',
+        tension: 0.4,
+        fill: true,
+        pointRadius: 4,
+        pointHoverRadius: 7,
+        pointBackgroundColor: '#a78bfa',
+        borderWidth: 2,
+      },
+      {
+        label: '原料产品',
+        data: data.raw.rate,
+        borderColor: '#34d399',
+        backgroundColor: 'rgba(52,211,153,0.08)',
+        tension: 0.4,
+        fill: true,
+        pointRadius: 4,
+        pointHoverRadius: 7,
+        pointBackgroundColor: '#34d399',
+        borderWidth: 2,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#1a2235',
+        borderColor: 'rgba(255,255,255,0.1)',
+        borderWidth: 1,
+        titleColor: '#94a3b8',
+        bodyColor: '#e2e8f0',
+        callbacks: {
+          label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2)}%`
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: gridColor },
+        ticks: { color: tickColor },
+        border: { color: 'transparent' }
+      },
+      y: {
+        min: 80,
+        max: 98,
+        grid: { color: gridColor },
+        ticks: {
+          color: tickColor,
+          callback: v => v + '%'
+        },
+        border: { color: 'transparent' }
+      }
+    }
+  }
+});
+
+// ---- Volume Chart ----
+const volCtx = document.getElementById('volChart').getContext('2d');
+const volChart = new Chart(volCtx, {
+  type: 'bar',
+  data: {
+    labels: months,
+    datasets: [
+      {
+        label: 'OEM',
+        data: data.oem.vol,
+        backgroundColor: 'rgba(56,189,248,0.7)',
+        borderRadius: 4,
+        borderSkipped: false,
+      },
+      {
+        label: '包辅料',
+        data: data.bfl.vol,
+        backgroundColor: 'rgba(167,139,250,0.7)',
+        borderRadius: 4,
+        borderSkipped: false,
+      },
+      {
+        label: '原料产品',
+        data: data.raw.vol,
+        backgroundColor: 'rgba(52,211,153,0.7)',
+        borderRadius: 4,
+        borderSkipped: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#1a2235',
+        borderColor: 'rgba(255,255,255,0.1)',
+        borderWidth: 1,
+        titleColor: '#94a3b8',
+        bodyColor: '#e2e8f0',
+      }
+    },
+    scales: {
+      x: {
+        stacked: false,
+        grid: { color: gridColor },
+        ticks: { color: tickColor },
+        border: { color: 'transparent' }
+      },
+      y: {
+        grid: { color: gridColor },
+        ticks: { color: tickColor },
+        border: { color: 'transparent' }
+      }
+    }
+  }
+});
+
+function switchVol(type, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (type === 'all') {
+    volChart.data.datasets[0].data = data.oem.vol;
+    volChart.data.datasets[1].data = data.bfl.vol;
+    volChart.data.datasets[2].data = data.raw.vol;
+    volChart.data.datasets[0].hidden = false;
+    volChart.data.datasets[1].hidden = false;
+    volChart.data.datasets[2].hidden = false;
+  } else {
+    const map = { oem: 0, bfl: 1, raw: 2 };
+    [0,1,2].forEach(i => volChart.data.datasets[i].hidden = i !== map[type]);
+  }
+  volChart.update();
+}
+
+// ---- Concession Chart ----
+const concCtx = document.getElementById('concessionChart').getContext('2d');
+new Chart(concCtx, {
+  type: 'bar',
+  data: {
+    labels: months,
+    datasets: [
+      {
+        label: 'OEM',
+        data: data.oem.concession,
+        backgroundColor: 'rgba(56,189,248,0.75)',
+        borderRadius: 3,
+        borderSkipped: false,
+        stack: 'stack'
+      },
+      {
+        label: '包辅料',
+        data: data.bfl.concession,
+        backgroundColor: 'rgba(167,139,250,0.75)',
+        borderRadius: 3,
+        borderSkipped: false,
+        stack: 'stack'
+      },
+      {
+        label: '原料产品',
+        data: data.raw.concession,
+        backgroundColor: 'rgba(52,211,153,0.75)',
+        borderRadius: 3,
+        borderSkipped: false,
+        stack: 'stack'
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: {
+        display: true,
+        position: 'bottom',
+        labels: {
+          color: '#64748b',
+          boxWidth: 10,
+          boxHeight: 10,
+          padding: 14,
+          font: { size: 11 }
+        }
+      },
+      tooltip: {
+        backgroundColor: '#1a2235',
+        borderColor: 'rgba(255,255,255,0.1)',
+        borderWidth: 1,
+        titleColor: '#94a3b8',
+        bodyColor: '#e2e8f0',
+      }
+    },
+    scales: {
+      x: {
+        stacked: true,
+        grid: { color: gridColor },
+        ticks: { color: tickColor },
+        border: { color: 'transparent' }
+      },
+      y: {
+        stacked: true,
+        grid: { color: gridColor },
+        ticks: { color: tickColor },
+        border: { color: 'transparent' }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
