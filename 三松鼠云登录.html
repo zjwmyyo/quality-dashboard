@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>三松鼠云 · 登录</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Nunito:wght@300;400;600&display=swap');
+
+    :root {
+      --pine: #1a3a2a;
+      --moss: #2d5a3d;
+      --sage: #4a8c5c;
+      --mint: #7dbf8e;
+      --cream: #f5f0e8;
+      --sand: #e8dfc8;
+      --warm-white: #faf8f3;
+      --text-dark: #1a2318;
+      --text-mid: #3d5248;
+      --text-light: #6b8f77;
+      --error: #c0392b;
+      --safe-top: env(safe-area-inset-top);
+      --safe-bottom: env(safe-area-inset-bottom);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+      height: 100%;
+      min-height: 100dvh;
+      background: var(--pine);
+      font-family: 'Nunito', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(74,140,92,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 80%, rgba(45,90,61,0.4) 0%, transparent 60%),
+        radial-gradient(ellipse 100% 100% at 50% 0%, rgba(26,58,42,0.9) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 180px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'%3E%3Cpolygon points='30,200 60,120 90,200' fill='%23122a1c' opacity='0.8'/%3E%3Cpolygon points='40,200 60,80 80,200' fill='%231a3a2a' opacity='0.9'/%3E%3Cpolygon points='100,200 140,100 180,200' fill='%230e2018' opacity='0.85'/%3E%3Cpolygon points='120,200 140,55 160,200' fill='%23122a1c' opacity='0.95'/%3E%3Cpolygon points='210,200 255,90 300,200' fill='%231a3a2a' opacity='0.8'/%3E%3Cpolygon points='230,200 255,45 278,200' fill='%230e2018' opacity='0.9'/%3E%3Cpolygon points='310,200 350,115 390,200' fill='%23122a1c' opacity='0.85'/%3E%3Cpolygon points='325,200 350,70 375,200' fill='%231a3a2a' opacity='0.95'/%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: bottom;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.7;
+    }
+
+    .stars { position: fixed; top: 0; left: 0; right: 0; height: 60%; pointer-events: none; z-index: 0; overflow: hidden; }
+    .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--dur) ease-in-out infinite var(--delay); }
+    @keyframes twinkle {
+      0%, 100% { opacity: var(--min-op); transform: scale(1); }
+      50% { opacity: var(--max-op); transform: scale(1.3); }
+    }
+
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: calc(var(--safe-top) + 44px);
+      padding-bottom: calc(var(--safe-bottom) + 100px);
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .logo-area { text-align: center; margin-bottom: 36px; animation: fadeDown 0.8s ease both; }
+    .logo-icon {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, var(--sage), var(--mint));
+      border-radius: 22px;
+      margin: 0 auto 14px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 2px 8px rgba(125,191,142,0.3);
+      font-size: 36px;
+    }
+    .logo-title { font-family: 'Noto Serif SC', serif; font-size: 26px; font-weight: 700; color: var(--cream); letter-spacing: 0.05em; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .logo-subtitle { font-size: 12px; color: var(--mint); margin-top: 4px; letter-spacing: 0.12em; font-weight: 300; }
+
+    .login-card {
+      width: 100%; max-width: 420px;
+      background: rgba(250,248,243,0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 28px;
+      padding: 34px 26px 30px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.35), 0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.8);
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+
+    .card-title { font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 600; color: var(--text-dark); margin-bottom: 5px; }
+    .card-desc { font-size: 13px; color: var(--text-light); margin-bottom: 26px; }
+
+    .error-msg {
+      background: rgba(192,57,43,0.08);
+      border: 1px solid rgba(192,57,43,0.2);
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-size: 13px;
+      color: var(--error);
+      margin-bottom: 16px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      line-height: 1.4;
+    }
+    .error-msg.show { display: flex; }
+
+    .form-group { margin-bottom: 16px; }
+    .form-label { font-size: 11px; font-weight: 700; color: var(--text-mid); letter-spacing: 0.08em; margin-bottom: 7px; display: block; text-transform: uppercase; }
+
+    .input-wrapper { position: relative; display: flex; align-items: center; }
+    .input-icon { position: absolute; left: 14px; font-size: 17px; color: var(--text-light); pointer-events: none; z-index: 1; }
+
+    .form-input {
+      width: 100%; height: 52px;
+      background: var(--warm-white);
+      border: 1.5px solid var(--sand);
+      border-radius: 14px;
+      padding: 0 44px 0 44px;
+      font-size: 16px;
+      color: var(--text-dark);
+      font-family: inherit;
+      transition: all 0.2s ease;
+      -webkit-appearance: none; appearance: none; outline: none;
+    }
+    .form-input:focus { border-color: var(--sage); background: white; box-shadow: 0 0 0 3px rgba(74,140,92,0.12); }
+    .form-input.error { border-color: var(--error); box-shadow: 0 0 0 3px rgba(192,57,43,0.1); }
+    .form-input::placeholder { color: #b0c4b8; }
+
+    .toggle-pw { position: absolute; right: 14px; background: none; border: none; font-size: 18px; color: var(--text-light); cursor: pointer; padding: 4px; line-height: 1; }
+
+    .options-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; margin-top: 6px; }
+    .remember-label { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-mid); cursor: pointer; -webkit-user-select: none; user-select: none; }
+    .custom-check { width: 20px; height: 20px; border: 1.5px solid var(--sand); border-radius: 6px; background: var(--warm-white); display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; flex-shrink: 0; }
+    .custom-check.checked { background: var(--sage); border-color: var(--sage); }
+    .custom-check.checked::after { content: '✓'; color: white; font-size: 12px; font-weight: 700; }
+    .forgot-link { font-size: 13px; color: var(--sage); text-decoration: none; font-weight: 600; }
+
+    .login-btn {
+      width: 100%; height: 54px;
+      background: linear-gradient(135deg, var(--pine) 0%, var(--moss) 100%);
+      border: none; border-radius: 16px;
+      color: white; font-size: 17px; font-weight: 700;
+      cursor: pointer; font-family: inherit; letter-spacing: 0.05em;
+      position: relative; overflow: hidden;
+      box-shadow: 0 8px 24px rgba(26,58,42,0.4);
+      transition: all 0.2s ease;
+      -webkit-appearance: none;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .login-btn:active:not(:disabled) { transform: scale(0.98); box-shadow: 0 4px 12px rgba(26,58,42,0.3); }
+    .login-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+    .spinner { width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; display: none; }
+    .login-btn.loading .spinner { display: block; }
+    .login-btn.loading .btn-text { opacity: 0.8; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .divider { display: flex; align-items: center; gap: 12px; margin: 20px 0; }
+    .divider-line { flex: 1; height: 1px; background: var(--sand); }
+    .divider-text { font-size: 12px; color: var(--text-light); white-space: nowrap; }
+
+    .direct-link {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 15px;
+      background: var(--warm-white);
+      border: 1.5px solid var(--sand);
+      border-radius: 14px;
+      color: var(--text-mid);
+      font-size: 14px; font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .direct-link:active { background: var(--sand); transform: scale(0.98); }
+
+    /* Success overlay */
+    .success-overlay {
+      position: fixed; inset: 0;
+      background: rgba(18,42,28,0.97);
+      z-index: 100;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 14px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease;
+      padding: 40px;
+    }
+    .success-overlay.show { opacity: 1; pointer-events: all; }
+    .success-icon { width: 84px; height: 84px; background: linear-gradient(135deg, var(--sage), var(--mint)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 42px; animation: popIn 0.5s 0.2s ease both; opacity: 0; }
+    .success-overlay.show .success-icon { opacity: 1; }
+    .success-title { font-family: 'Noto Serif SC', serif; font-size: 24px; color: var(--cream); animation: fadeUp 0.5s 0.35s ease both; opacity: 0; }
+    .success-sub { font-size: 15px; color: var(--mint); animation: fadeUp 0.5s 0.45s ease both; opacity: 0; text-align: center; }
+    .success-overlay.show .success-title,
+    .success-overlay.show .success-sub { opacity: 1; }
+    .go-btn { margin-top: 14px; padding: 15px 40px; background: linear-gradient(135deg, var(--sage), var(--mint)); border: none; border-radius: 16px; color: white; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit; box-shadow: 0 8px 24px rgba(74,140,92,0.4); animation: fadeUp 0.5s 0.55s ease both; opacity: 0; -webkit-appearance: none; }
+    .success-overlay.show .go-btn { opacity: 1; }
+    @keyframes popIn { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: scale(1); } }
+
+    .register-row { text-align: center; margin-top: 22px; font-size: 14px; color: rgba(245,240,232,0.55); animation: fadeUp 0.8s 0.3s ease both; }
+    .register-row a { color: var(--mint); font-weight: 700; text-decoration: none; }
+
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<!-- Success overlay -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-icon">✓</div>
+  <div class="success-title">登录成功！</div>
+  <div class="success-sub" id="successName">欢迎回来</div>
+  <button class="go-btn" onclick="goToApp()">进入云平台 →</button>
+</div>
+
+<div class="page-wrapper">
+  <div class="logo-area">
+    <div class="logo-icon">🌲</div>
+    <div class="logo-title">三松鼠云</div>
+    <div class="logo-subtitle">CLOUD · 3SONGSHU</div>
+  </div>
+
+  <div class="login-card">
+    <div class="card-title">欢迎回来</div>
+    <div class="card-desc">登录您的三松鼠云账号</div>
+
+    <div class="error-msg" id="errorMsg">
+      <span>⚠️</span>
+      <span id="errorText">账号或密码错误</span>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">账号 / 用户名</label>
+      <div class="input-wrapper">
+        <span class="input-icon">👤</span>
+        <input class="form-input" type="text" id="username"
+          placeholder="请输入账号" autocomplete="username"
+          autocapitalize="off" autocorrect="off" spellcheck="false">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">密码</label>
+      <div class="input-wrapper">
+        <span class="input-icon">🔒</span>
+        <input class="form-input" type="password" id="password"
+          placeholder="请输入密码" autocomplete="current-password">
+        <button class="toggle-pw" onclick="togglePw()" type="button" id="pwToggle">👁</button>
+      </div>
+    </div>
+
+    <div class="options-row">
+      <label class="remember-label" onclick="toggleRemember()">
+        <div class="custom-check" id="rememberBox"></div>
+        记住账号
+      </label>
+      <a href="https://cloud.3songshu.com/#/forgot" class="forgot-link">忘记密码？</a>
+    </div>
+
+    <button class="login-btn" id="loginBtn" onclick="handleLogin()">
+      <div class="spinner"></div>
+      <span class="btn-text">登 录</span>
+    </button>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-text">或者直接访问</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <a class="direct-link" href="https://cloud.3songshu.com/#/login" target="_blank">
+      🖥️ 在浏览器中打开完整版
+    </a>
+  </div>
+
+  <div class="register-row">
+    还没有账号？<a href="https://cloud.3songshu.com/#/register" target="_blank">立即注册</a>
+  </div>
+</div>
+
+<script>
+// ── Stars ──
+(function() {
+  const sc = document.getElementById('stars');
+  for (let i = 0; i < 55; i++) {
+    const s = document.createElement('div');
+    const sz = Math.random() * 2.5 + 0.5;
+    s.className = 'star';
+    s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${2+Math.random()*3}s;--delay:${-Math.random()*4}s;--min-op:${0.1+Math.random()*0.2};--max-op:${0.5+Math.random()*0.5}`;
+    sc.appendChild(s);
+  }
+})();
+
+// ── State ──
+let rememberMe = false;
+let pwVisible = false;
+
+// ── Remember me ──
+function toggleRemember() {
+  rememberMe = !rememberMe;
+  document.getElementById('rememberBox').classList.toggle('checked', rememberMe);
+}
+
+// ── Toggle password ──
+function togglePw() {
+  pwVisible = !pwVisible;
+  document.getElementById('password').type = pwVisible ? 'text' : 'password';
+  document.getElementById('pwToggle').textContent = pwVisible ? '🙈' : '👁';
+}
+
+// ── Restore saved username ──
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('snt_username');
+  if (saved) {
+    document.getElementById('username').value = saved;
+    rememberMe = true;
+    document.getElementById('rememberBox').classList.add('checked');
+  }
+});
+
+// ── Error helpers ──
+function showError(msg) {
+  document.getElementById('errorText').textContent = msg;
+  document.getElementById('errorMsg').classList.add('show');
+  document.getElementById('username').classList.add('error');
+  document.getElementById('password').classList.add('error');
+}
+function hideError() {
+  document.getElementById('errorMsg').classList.remove('show');
+  document.getElementById('username').classList.remove('error');
+  document.getElementById('password').classList.remove('error');
+}
+
+['username', 'password'].forEach(id => {
+  document.getElementById(id).addEventListener('input', hideError);
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') handleLogin();
+});
+
+// ── Login ──
+// 根据抓包信息推断可能的接口，逐一尝试
+const API_CANDIDATES = [
+  { url: 'https://uic.3songshu.com/user/login',      body: u => ({ username: u.user, password: u.pass }) },
+  { url: 'https://uic.3songshu.com/user/yunzao',     body: u => ({ username: u.user, password: u.pass, loginType: 0 }) },
+  { url: 'https://uic.3songshu.com/auth/login',      body: u => ({ username: u.user, password: u.pass }) },
+  { url: 'https://uic.3songshu.com/login',           body: u => ({ username: u.user, password: u.pass }) },
+];
+
+async function tryLogin(candidate, user, pass) {
+  const resp = await fetch(candidate.url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json, text/plain, */*',
+      'Origin': 'https://cloud.3songshu.com',
+      'Referer': 'https://cloud.3songshu.com/'
+    },
+    credentials: 'include',
+    body: JSON.stringify(candidate.body({ user, pass }))
+  });
+  if (resp.status === 404) return null; // try next
+  const data = await resp.json();
+  return { resp, data };
+}
+
+async function handleLogin() {
+  hideError();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+
+  if (!username) { showError('请输入账号'); return; }
+  if (!password) { showError('请输入密码'); return; }
+
+  const btn = document.getElementById('loginBtn');
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  try {
+    let result = null;
+
+    for (const candidate of API_CANDIDATES) {
+      try {
+        result = await tryLogin(candidate, username, password);
+        if (result) break;
+      } catch (e) {
+        // CORS or network — continue trying
+        continue;
+      }
+    }
+
+    if (!result) {
+      // All candidates failed (likely CORS) — guide user to full site
+      showError('由于浏览器安全限制，请点击下方"完整版"按钮访问');
+      btn.classList.remove('loading');
+      btn.disabled = false;
+      return;
+    }
+
+    const { resp, data } = result;
+    const ok = resp.ok && (
+      data.code === 0 || data.code === 200 ||
+      data.success === true ||
+      data.token || data.data?.token || data.access_token
+    );
+
+    if (ok) {
+      // Save token / session info
+      const token = data.token || data.data?.token || data.access_token || data.data?.access_token || '';
+      const sntToken = resp.headers.get('Snt_token') || data.sntToken || data.data?.sntToken || '';
+      const displayName = data.data?.name || data.data?.nickname || data.data?.username || data.name || username;
+
+      if (token) localStorage.setItem('snt_token', token);
+      if (sntToken) localStorage.setItem('snt_snt_token', sntToken);
+      if (rememberMe) localStorage.setItem('snt_username', username);
+      else localStorage.removeItem('snt_username');
+
+      // Show success
+      document.getElementById('successName').textContent = `欢迎回来，${displayName} 👋`;
+      document.getElementById('successOverlay').classList.add('show');
+
+    } else {
+      const msg = data.message || data.msg || data.error || data.errmsg || '账号或密码错误，请重试';
+      showError(msg);
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    }
+
+  } catch (err) {
+    showError('网络异常，请检查网络连接后重试');
+    btn.classList.remove('loading');
+    btn.disabled = false;
+    console.error('[Login Error]', err);
+  }
+}
+
+// ── Navigate to app after login ──
+function goToApp() {
+  const token = localStorage.getItem('snt_token');
+  if (token) {
+    window.location.href = 'https://cloud.3songshu.com/#/?token=' + encodeURIComponent(token);
+  } else {
+    window.location.href = 'https://cloud.3songshu.com/#/';
+  }
+}
+</script>
+</body>
+</html>
