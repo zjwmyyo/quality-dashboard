@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#080808">
+<title>2026 · 315晚会预测报告</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════
+   TOKENS
+══════════════════════════════════════ */
+:root {
+  --red:       #FF1744;
+  --red-dark:  #B71C1C;
+  --red-glow:  rgba(255,23,68,0.25);
+  --bg:        #080808;
+  --surface:   #0f0f0f;
+  --surface2:  #131313;
+  --border:    rgba(255,255,255,0.07);
+  --text:      #F0EBE0;
+  --text-dim:  #7a7570;
+  --text-mid:  #b5b0a8;
+  --gold:      #D4AF37;
+
+  /* spacing safe-area for iPhone notch */
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left:   env(safe-area-inset-left, 0px);
+  --safe-right:  env(safe-area-inset-right, 0px);
+
+  --topbar-h: 52px;
+  --page-px:  clamp(16px, 5vw, 48px);
+  --max-w:    1160px;
+}
+
+/* ══════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif SC', serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  /* hide custom cursor on touch */
+}
+
+/* Only show custom cursor on non-touch */
+@media (hover: hover) and (pointer: fine) {
+  body { cursor: none; }
+  .cursor, .cursor-ring { display: block; }
+}
+@media (hover: none), (pointer: coarse) {
+  .cursor, .cursor-ring { display: none !important; }
+}
+
+.cursor {
+  position: fixed;
+  width: 8px; height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  display: none;
+}
+.cursor-ring {
+  position: fixed;
+  width: 32px; height: 32px;
+  border: 1px solid rgba(255,23,68,0.45);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  display: none;
+}
+
+/* Noise overlay */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 900;
+  opacity: 0.3;
+}
+
+#bg-canvas {
+  position: fixed; inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════
+   TOP BAR
+══════════════════════════════════════ */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  /* account for notch */
+  padding-top: var(--safe-top);
+  height: calc(var(--topbar-h) + var(--safe-top));
+  background: rgba(8,8,8,0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-left: calc(var(--page-px) + var(--safe-left));
+  padding-right: calc(var(--page-px) + var(--safe-right));
+  padding-bottom: 0;
+  z-index: 500;
+}
+
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: var(--topbar-h);
+}
+
+.topbar-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(18px, 4vw, 22px);
+  color: var(--red);
+  letter-spacing: 3px;
+  line-height: 1;
+}
+
+.topbar-info {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(8px, 1.8vw, 10px);
+  letter-spacing: clamp(1px, 0.5vw, 3px);
+  color: var(--text-dim);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* hide long text on small phones */
+@media (max-width: 400px) {
+  .topbar-info .info-text { display: none; }
+}
+
+.dot-live {
+  width: 6px; height: 6px;
+  background: var(--red);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--red);
+  animation: blink 1.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.15; } }
+
+.progress-bar {
+  position: fixed;
+  top: calc(var(--topbar-h) + var(--safe-top));
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--red-dark), var(--red));
+  z-index: 501;
+  transform-origin: left;
+  transform: scaleX(0);
+  box-shadow: 0 0 8px var(--red-glow);
+  width: 100%;
+}
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100svh; /* svh for iPhone */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--topbar-h) + var(--safe-top) + 48px) var(--page-px) clamp(80px, 12vh, 120px);
+  z-index: 1;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-bg-number {
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(180px, 62vw, 520px);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,23,68,0.045);
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  letter-spacing: -6px;
+  white-space: nowrap;
+  animation: drift 14s ease-in-out infinite alternate;
+  user-select: none;
+}
+
+@keyframes drift {
+  from { transform: translate(-50%, -50%) scale(1); }
+  to   { transform: translate(-50%, -52%) scale(1.04); }
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: clamp(24px, 5vw, 40px);
+  opacity: 0;
+  animation: fadeInDown 1s ease 0.2s forwards;
+}
+
+.eyebrow-line { width: 28px; height: 1px; background: var(--red); flex-shrink: 0; }
+
+.eyebrow-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(9px, 2.2vw, 11px);
+  letter-spacing: clamp(2px, 1vw, 5px);
+  color: var(--red);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  line-height: 0.88;
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: fadeInUp 1s ease 0.4s forwards;
+}
+
+.hero-title .t1 {
+  display: block;
+  font-size: clamp(100px, 26vw, 220px);
+  color: transparent;
+  -webkit-text-stroke: clamp(1.5px, 0.4vw, 2.5px) var(--red);
+}
+
+.hero-title .t2 {
+  display: block;
+  font-size: clamp(40px, 12vw, 108px);
+  color: var(--text);
+  letter-spacing: 0.12em;
+}
+
+.hero-date {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(9px, 2vw, 13px);
+  color: var(--text-dim);
+  letter-spacing: clamp(3px, 1.5vw, 8px);
+  text-transform: uppercase;
+  margin-bottom: clamp(32px, 6vw, 56px);
+  opacity: 0;
+  animation: fadeInUp 1s ease 0.6s forwards;
+}
+
+.hero-desc {
+  max-width: 540px;
+  width: 100%;
+  font-size: clamp(13px, 3vw, 15px);
+  line-height: 1.9;
+  color: var(--text-mid);
+  font-weight: 300;
+  border-left: 2px solid var(--red);
+  padding-left: clamp(14px, 3vw, 22px);
+  text-align: left;
+  margin: 0 auto clamp(40px, 8vw, 72px);
+  opacity: 0;
+  animation: fadeInUp 1s ease 0.8s forwards;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeInUp 1s ease 1s forwards;
+  border: 1px solid var(--border);
+  flex-wrap: nowrap;
+}
+
+.stat-item {
+  text-align: center;
+  padding: clamp(12px, 3vw, 20px) clamp(20px, 5vw, 40px);
+  border-right: 1px solid var(--border);
+  flex: 1;
+}
+.stat-item:last-child { border-right: none; }
+
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 9vw, 56px);
+  color: var(--red);
+  line-height: 1;
+  display: block;
+}
+
+.stat-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(7px, 1.8vw, 9px);
+  letter-spacing: clamp(1px, 0.5vw, 3px);
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-top: 5px;
+  display: block;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: clamp(20px, 5vh, 44px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeIn 1s ease 1.6s forwards;
+}
+
+/* hide on very short screens */
+@media (max-height: 600px) { .scroll-indicator { display: none; } }
+
+.mouse-icon {
+  width: 20px; height: 30px;
+  border: 1.5px solid rgba(255,255,255,0.13);
+  border-radius: 10px;
+  position: relative;
+}
+
+.mouse-icon::after {
+  content: '';
+  position: absolute;
+  top: 5px; left: 50%;
+  transform: translateX(-50%);
+  width: 2px; height: 5px;
+  background: var(--red);
+  border-radius: 2px;
+  animation: scroll-dot 2s ease-in-out infinite;
+}
+
+@keyframes scroll-dot {
+  0%   { opacity:1; transform: translateX(-50%) translateY(0); }
+  100% { opacity:0; transform: translateX(-50%) translateY(12px); }
+}
+
+.scroll-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════
+   TICKER
+══════════════════════════════════════ */
+.ticker-section {
+  position: relative; z-index: 2;
+  background: var(--red); overflow: hidden;
+}
+
+.ticker-inner { display: flex; align-items: center; height: 44px; }
+
+.ticker-label {
+  background: #000;
+  color: #fff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(9px, 2vw, 11px);
+  font-weight: 500;
+  letter-spacing: 3px;
+  padding: 0 clamp(12px, 3vw, 20px);
+  height: 100%;
+  display: flex; align-items: center;
+  white-space: nowrap; flex-shrink: 0;
+}
+
+.ticker-track { overflow: hidden; flex: 1; }
+
+.ticker-content {
+  display: inline-flex;
+  animation: marquee 26s linear infinite;
+  white-space: nowrap;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(9px, 2vw, 11px);
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.9);
+}
+
+.ticker-content span {
+  padding: 0 clamp(16px, 4vw, 28px);
+  border-right: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; height: 44px;
+}
+
+@keyframes marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+/* ══════════════════════════════════════
+   LAYOUT WRAPPER
+══════════════════════════════════════ */
+.wrapper {
+  position: relative; z-index: 2;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--page-px);
+  padding-left:  calc(var(--page-px) + var(--safe-left));
+  padding-right: calc(var(--page-px) + var(--safe-right));
+}
+
+/* ══════════════════════════════════════
+   SECTION HEADER
+══════════════════════════════════════ */
+.section-header {
+  padding: clamp(60px, 10vw, 96px) 0 clamp(36px, 5vw, 56px);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: clamp(24px, 4vw, 56px);
+  gap: 24px;
+}
+
+@media (max-width: 480px) {
+  .section-header { grid-template-columns: 1fr; }
+  .section-count  { display: none; }
+}
+
+.section-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(9px, 2vw, 10px);
+  letter-spacing: clamp(3px, 1vw, 5px);
+  color: var(--red);
+  text-transform: uppercase;
+  margin-bottom: clamp(10px, 2vw, 16px);
+  display: flex; align-items: center; gap: 10px;
+}
+
+.section-eyebrow::before {
+  content: ''; width: 24px; height: 1px;
+  background: var(--red); display: block; flex-shrink: 0;
+}
+
+.section-title-big {
+  font-size: clamp(28px, 6vw, 60px);
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.section-title-big em { font-style: normal; color: var(--red); }
+
+.section-count {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 10vw, 110px);
+  color: transparent;
+  -webkit-text-stroke: 1px var(--border);
+  line-height: 1;
+}
+
+/* ══════════════════════════════════════
+   FEATURED CARD
+══════════════════════════════════════ */
+.featured-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--red);
+  padding: clamp(28px, 5vw, 56px);
+  margin-bottom: 3px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(24px, 5vw, 56px);
+  position: relative; overflow: hidden;
+  transition: border-color 0.4s;
+}
+
+.featured-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 0% 0%, rgba(255,23,68,0.06) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .featured-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .featured-rank { font-size: 64px !important; }
+}
+
+.featured-rank {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 12vw, 130px);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,23,68,0.13);
+  line-height: 1;
+  align-self: center;
+  flex-shrink: 0;
+}
+
+.featured-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,23,68,0.1);
+  border: 1px solid rgba(255,23,68,0.28);
+  color: var(--red);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(9px, 2vw, 10px);
+  letter-spacing: 3px; padding: 5px 12px;
+  text-transform: uppercase; margin-bottom: 18px;
+}
+.featured-tag::before { content: '◆'; font-size: 7px; }
+
+.featured-card h2 {
+  font-size: clamp(18px, 4vw, 34px);
+  font-weight: 900; line-height: 1.35;
+  margin-bottom: clamp(14px, 2vw, 20px);
+}
+
+.featured-card > div > p {
+  font-size: clamp(13px, 2.5vw, 15px);
+  line-height: 1.9; color: var(--text-mid);
+  max-width: 600px; margin-bottom: clamp(24px, 4vw, 36px);
+  font-weight: 300;
+}
+
+.prob-row { display: flex; align-items: center; gap: 16px; }
+
+.prob-track {
+  flex: 1; height: 3px;
+  background: rgba(255,255,255,0.06); overflow: hidden;
+}
+
+.prob-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--red-dark), var(--red));
+  transform-origin: left; transform: scaleX(0);
+  transition: transform 1.8s cubic-bezier(0.16,1,0.3,1);
+  box-shadow: 4px 0 12px var(--red-glow);
+}
+.prob-fill.anim { transform: scaleX(1); }
+
+.prob-pct {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(24px, 5vw, 32px);
+  color: var(--red); white-space: nowrap; line-height: 1;
+}
+
+.prob-label-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; color: var(--text-dim);
+  letter-spacing: 2px; margin-top: 8px; display: block;
+}
+
+/* ══════════════════════════════════════
+   GRID CARDS
+══════════════════════════════════════ */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+
+@media (max-width: 900px) {
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .cards-grid { grid-template-columns: 1fr; }
+}
+
+.grid-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: clamp(24px, 4vw, 40px) clamp(20px, 3.5vw, 34px);
+  position: relative; overflow: hidden;
+  transition: background 0.3s, border-color 0.3s, transform 0.35s;
+  cursor: default;
+  /* tap highlight on iOS */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.grid-card::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--red), transparent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+/* hover only on non-touch */
+@media (hover: hover) and (pointer: fine) {
+  .grid-card:hover { background: #121212; border-color: rgba(255,23,68,0.12); transform: translateY(-2px); }
+  .grid-card:hover::after { transform: scaleX(1); }
+  .grid-card:hover .card-icon-wrap { background: rgba(255,23,68,0.07); border-color: rgba(255,23,68,0.2); }
+}
+
+/* active press state for touch */
+.grid-card:active { background: #111; }
+
+.card-header {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; margin-bottom: clamp(16px, 3vw, 24px);
+}
+
+.card-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 3px; color: var(--text-dim);
+}
+
+.card-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(8px, 1.8vw, 9px);
+  letter-spacing: 1px; padding: 4px 9px;
+  text-transform: uppercase;
+}
+.badge-hot  { background: rgba(255,23,68,0.1); color: var(--red); border: 1px solid rgba(255,23,68,0.22); }
+.badge-warm { background: rgba(212,175,55,0.08); color: var(--gold); border: 1px solid rgba(212,175,55,0.18); }
+
+.card-icon-wrap {
+  width: clamp(44px,8vw,52px); height: clamp(44px,8vw,52px);
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: clamp(18px,4vw,22px);
+  margin-bottom: clamp(14px,2.5vw,18px);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.grid-card h3 {
+  font-size: clamp(15px, 3vw, 17px);
+  font-weight: 700; line-height: 1.45;
+  margin-bottom: clamp(8px, 1.5vw, 12px);
+}
+
+.grid-card > p, .grid-card p {
+  font-size: clamp(12px, 2.5vw, 13px);
+  line-height: 1.85; color: var(--text-dim);
+  font-weight: 300; margin-bottom: clamp(20px, 4vw, 28px);
+}
+
+.card-prob { display: flex; flex-direction: column; gap: 7px; }
+
+.card-prob-track {
+  height: 2px; background: rgba(255,255,255,0.05); overflow: hidden;
+}
+
+.card-prob-fill {
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,23,68,0.4), var(--red));
+  transform-origin: left; transform: scaleX(0);
+  transition: transform 1.5s cubic-bezier(0.16,1,0.3,1);
+}
+.card-prob-fill.anim { transform: scaleX(1); }
+
+.card-prob-meta { display: flex; justify-content: space-between; align-items: center; }
+
+.card-prob-pct {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(20px, 4vw, 24px);
+  color: var(--text-mid); line-height: 1;
+}
+
+.card-prob-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; letter-spacing: 2px;
+  color: var(--text-dim); text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════
+   ANALYSIS SECTION
+══════════════════════════════════════ */
+.analysis-section { padding: clamp(60px, 10vw, 96px) 0; }
+
+.analysis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  margin-top: clamp(32px, 5vw, 56px);
+}
+
+@media (max-width: 680px) {
+  .analysis-grid { grid-template-columns: 1fr; }
+}
+
+.analysis-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: clamp(28px, 5vw, 44px) clamp(24px, 4.5vw, 40px);
+}
+
+.analysis-card.wide {
+  grid-column: 1 / -1;
+  background: var(--surface2);
+  border-top: 2px solid var(--gold);
+}
+
+.analysis-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(9px, 2vw, 10px);
+  letter-spacing: 4px; text-transform: uppercase;
+  margin-bottom: clamp(12px, 2vw, 18px);
+  display: flex; align-items: center; gap: 10px;
+}
+.analysis-tag::before { content: ''; width: 18px; height: 1px; display: block; flex-shrink: 0; }
+.analysis-tag.red  { color: var(--red); }
+.analysis-tag.red::before  { background: var(--red); }
+.analysis-tag.gold { color: var(--gold); }
+.analysis-tag.gold::before { background: var(--gold); }
+
+.analysis-card h3 {
+  font-size: clamp(17px, 3.5vw, 20px);
+  font-weight: 700; line-height: 1.4;
+  margin-bottom: clamp(12px, 2vw, 16px);
+}
+
+.analysis-card p {
+  font-size: clamp(12.5px, 2.5vw, 13.5px);
+  line-height: 1.9; color: var(--text-mid); font-weight: 300;
+}
+.analysis-card p + p { margin-top: 12px; }
+
+strong { color: var(--text); font-weight: 600; }
+
+.timeline { margin-top: clamp(20px, 3vw, 32px); display: flex; flex-direction: column; }
+
+.timeline-item {
+  display: grid; grid-template-columns: 48px 1fr;
+  gap: 14px; padding: clamp(12px, 2vw, 16px) 0;
+  border-bottom: 1px solid var(--border); align-items: start;
+}
+.timeline-item:last-child { border-bottom: none; }
+
+.timeline-year {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; color: var(--red); letter-spacing: 1px; padding-top: 2px;
+}
+
+.timeline-text { font-size: clamp(12px, 2.5vw, 13px); color: var(--text-dim); line-height: 1.7; }
+
+/* ══════════════════════════════════════
+   DISCLAIMER
+══════════════════════════════════════ */
+.disclaimer {
+  background: rgba(212,175,55,0.04);
+  border: 1px solid rgba(212,175,55,0.14);
+  border-left: 3px solid var(--gold);
+  padding: clamp(20px, 4vw, 32px) clamp(20px, 4vw, 36px);
+  margin: clamp(36px, 6vw, 56px) 0;
+  display: flex; gap: 16px; align-items: flex-start;
+}
+
+.disclaimer-icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+
+.disclaimer-text {
+  font-size: clamp(11px, 2.5vw, 12px);
+  line-height: 1.8; color: var(--text-dim);
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.3px;
+}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer {
+  position: relative; z-index: 2;
+  border-top: 1px solid var(--border);
+  padding: clamp(40px, 8vw, 56px) var(--page-px) calc(clamp(28px, 5vw, 36px) + var(--safe-bottom));
+  padding-left:  calc(var(--page-px) + var(--safe-left));
+  padding-right: calc(var(--page-px) + var(--safe-right));
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 12vw, 72px);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,23,68,0.08);
+  letter-spacing: -2px; line-height: 1; margin-bottom: 16px;
+}
+
+.footer-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(8px, 2vw, 10px);
+  letter-spacing: clamp(2px, 1vw, 4px);
+  color: var(--text-dim); text-transform: uppercase;
+}
+.footer-meta span { color: var(--red); }
+
+/* ══════════════════════════════════════
+   REVEAL ANIMATIONS
+══════════════════════════════════════ */
+@keyframes fadeIn      { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeInDown  { from { opacity:0; transform:translateY(-18px); } to { opacity:1; transform:none; } }
+@keyframes fadeInUp    { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
+
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal.visible { opacity:1; transform:none; }
+.reveal-d1 { transition-delay: 0.08s; }
+.reveal-d2 { transition-delay: 0.16s; }
+.reveal-d3 { transition-delay: 0.24s; }
+.reveal-d4 { transition-delay: 0.32s; }
+
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity:1; transform:none; }
+}
+
+.sep {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  position: relative; z-index: 2;
+}
+</style>
+</head>
+<body>
+
+<div class="cursor"     id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<canvas id="bg-canvas"></canvas>
+<div class="progress-bar" id="progress"></div>
+
+<!-- ── TOP BAR ── -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brand">315 · 2026</div>
+    <div class="topbar-info">
+      <div class="dot-live"></div>
+      <span class="info-text">AI预测报告 · ENTERTAINMENT ONLY</span>
+    </div>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg-number">315</div>
+
+  <div class="hero-eyebrow">
+    <div class="eyebrow-line"></div>
+    <span class="eyebrow-text">AI Prediction Report · 2026</span>
+    <div class="eyebrow-line"></div>
+  </div>
+
+  <div class="hero-title">
+    <span class="t1">315</span>
+    <span class="t2">晚 会 预 测</span>
+  </div>
+
+  <p class="hero-date">Consumer Rights Day &nbsp;·&nbsp; March 15, 2026</p>
+
+  <p class="hero-desc">
+    基于近十年315晚会曝光规律、2025年全国消费投诉热点及社交媒体舆情监测，AI预测2026年315晚会最有可能曝光的八大领域。
+  </p>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num">8</span>
+      <span class="stat-label">预测领域</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">10</span>
+      <span class="stat-label">年数据基础</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">92%</span>
+      <span class="stat-label">最高概率</span>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="mouse-icon"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+</section>
+
+<!-- ── TICKER ── -->
+<div class="ticker-section">
+  <div class="ticker-inner">
+    <div class="ticker-label">BREAKING</div>
+    <div class="ticker-track">
+      <div class="ticker-content">
+        <span>AI深度伪造诈骗</span><span>预制菜虚假标注</span><span>家政天价乱象</span>
+        <span>保健品老年陷阱</span><span>新能源续航虚标</span><span>App大数据杀熟</span>
+        <span>职业培训诈骗</span><span>海鲜注水掺假</span><span>⚠ 纯AI预测 · 仅供娱乐</span>
+        <span>AI深度伪造诈骗</span><span>预制菜虚假标注</span><span>家政天价乱象</span>
+        <span>保健品老年陷阱</span><span>新能源续航虚标</span><span>App大数据杀熟</span>
+        <span>职业培训诈骗</span><span>海鲜注水掺假</span><span>⚠ 纯AI预测 · 仅供娱乐</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="wrapper">
+
+  <!-- Section header -->
+  <div class="section-header reveal">
+    <div>
+      <div class="section-eyebrow">重点曝光预测</div>
+      <h2 class="section-title-big">八大<em>高危</em>领域<br>深度研判</h2>
+    </div>
+    <div class="section-count">08</div>
+  </div>
+
+  <!-- Featured #1 -->
+  <div class="featured-card reveal">
+    <div class="featured-rank">01</div>
+    <div>
+      <div class="featured-tag">头号热门预测</div>
+      <h2>AI深度伪造与声音克隆诈骗产业链</h2>
+      <p>AI换脸电话诈骗、声音克隆、一键生成虚假视频合同等新型AI犯罪在2025年爆发式增长。预计315将重点揭露利用AI技术构建的诈骗黑灰产业——尤其是针对老年人的"AI子女"语音诈骗、直播间虚假AI名人代言，以及以"合法工具"形式销售的深度伪造软件。</p>
+      <div class="prob-row">
+        <div style="flex:1">
+          <div class="prob-track">
+            <div class="prob-fill" data-w="0.92"></div>
+          </div>
+          <span class="prob-label-text">曝光可能性评估</span>
+        </div>
+        <div class="prob-pct">92%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid #2–#8 -->
+  <div class="cards-grid" style="margin-top:3px">
+
+    <div class="grid-card reveal reveal-d1">
+      <div class="card-header">
+        <span class="card-num">NO.02</span>
+        <span class="card-badge badge-hot">高概率</span>
+      </div>
+      <div class="card-icon-wrap">🍔</div>
+      <h3>预制菜滥用与虚假标注</h3>
+      <p>餐厅以堂食价格售卖预制菜却不告知消费者，学校食堂、外卖平台标注缺失，"现炒现做"虚假宣传屡见不鲜。</p>
+      <div class="card-prob">
+        <div class="card-prob-track"><div class="card-prob-fill" data-w="0.88"></div></div>
+        <div class="card-prob-meta">
+          <span class="card-prob-pct">88%</span>
+          <span class="card-prob-label">曝光可能性</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-card reveal reveal-d2">
+      <div class="card-header">
+        <span class="card-num">NO.03</span>
+        <span class="card-badge badge-hot">高概率</span>
+      </div>
+      <div class="card-icon-wrap">🏠</div>
+      <h3>家政装修平台天价乱象</h3>
+      <p>上门维修天价收费、装修低价揽客后层层加价、虚假评价刷单泛滥，拒绝出示报价单，消费投诉量连年攀升。</p>
+      <div class="card-prob">
+        <div class="card-prob-track"><div class="card-prob-fill" data-w="0.85"></div></div>
+        <div class="card-prob-meta">
+          <span class="card-prob-pct">85%</span>
+          <span class="card-prob-label">曝光可能性</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-card reveal reveal-d3">
+      <div class="card-header">
+        <span class="card-num">NO.04</span>
+        <span class="card-badge badge-hot">高概率</span>
+      </div>
+      <div class="card-icon-wrap">💊</div>
+      <h3>保健品虚假宣传老年陷阱</h3>
+      <p>直播间"神药"夸大功效、伪健康讲座专攻老人、自动扣费陷阱、伪装成食品的违规保健品层出不穷。</p>
+      <div class="card-prob">
+        <div class="card-prob-track"><div class="card-prob-fill" data-w="0.83"></div></div>
+        <div class="card-prob-meta">
+          <span class="card-prob-pct">83%</span>
+          <span class="card-prob-label">曝光可能性</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-card reveal reveal-d1">
+      <div class="card-header">
+        <span class="card-num">NO.05</span>
+        <span class="card-badge badge-warm">较高概率</span>
+      </div>
+      <div class="card-icon-wrap">🚗</div>
+      <h3>新能源汽车数据造假维权难</h3>
+      <p>续航虚标、隐瞒事故记录、OTA暗降性能、质保条款设陷阱，消费者面临举证成本极高的维权困境。</p>
+      <div class="card-prob">
+        <div class="card-prob-track"><div class="card-prob-fill" data-w="0.75"></div></div>
+        <div class="card-prob-meta">
+          <span class="card-prob-pct">75%</span>
+          <span class="card-prob-label">曝光可能性</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-card reveal reveal-d2">
+      <div class="card-header">
+        <span class="card-num">NO.06</span>
+        <span class="card-badge badge-warm">较高概率</span>
+      </div>
+      <div class="card-icon-wrap">📱</div>
+      <h3>App强制权限大数据杀熟</h3>
+      <p>过度索取通讯录相册权限、同商品新老用户差异定价、会员订阅难退订、个人数据跨平台追踪出售。</p>
+      <div class="card-prob">
+        <div class="card-prob-track"><div class="card-prob-fill" data-w="0.72"></div></div>
+        <div class="card-prob-meta">
+          <span class="card-prob-pct">72%</span>
+          <span class="card-prob-label">曝光可能性</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-card reveal reveal-d3">
+      <div class="card-header">
+        <span class="card-num">NO.07</span>
+        <span class="card-badge badge-warm">较高概率</span>
+      </div>
+      <div class="card-icon-wrap">🎓</div>
+      <h3>职业培训机构考证诈骗</h3>
+      <p>"包过班"退费难、AI生成假证书批量流通、伪造名校合作资质、证书含金量夸大，求职者深陷培训陷阱。</p>
+      <div class="card-prob">
+        <div class="card-prob-track"><div class="card-prob-fill" data-w="0.68"></div></div>
+        <div class="card-prob-meta">
+          <span class="card-prob-pct">68%</span>
+          <span class="card-prob-label">曝光可能性</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-card reveal reveal-d4">
+      <div class="card-header">
+        <span class="card-num">NO.08</span>
+        <span class="card-badge badge-warm">较高概率</span>
+      </div>
+      <div class="card-icon-wrap">🐟</div>
+      <h3>生鲜食品注水掺假</h3>
+      <p>虾仁扇贝注水增重、死鱼复鲜处理、进口食品虚假认证、外卖食材以次充好、产地标注造假。</p>
+      <div class="card-prob">
+        <div class="card-prob-track"><div class="card-prob-fill" data-w="0.65"></div></div>
+        <div class="card-prob-meta">
+          <span class="card-prob-pct">65%</span>
+          <span class="card-prob-label">曝光可能性</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /cards-grid -->
+
+  <!-- Analysis -->
+  <div class="analysis-section">
+    <div class="section-eyebrow reveal">深度研判</div>
+    <h2 class="section-title-big reveal" style="margin-bottom:0">趋势洞察 &amp; <em>方法论</em></h2>
+
+    <div class="analysis-grid">
+
+      <div class="analysis-card reveal">
+        <div class="analysis-tag red">核心判断</div>
+        <h3>2026年新主线：AI赋能欺诈</h3>
+        <p>2026年315最大亮点大概率是"AI技术赋能诈骗"这条全新主线。过去诈骗需大量人工参与，如今借助语音克隆、视频伪造工具即可实施规模化欺诈。</p>
+        <p>这标志着消费欺诈进入技术化、平台化、产业化的新阶段，监管难度和社会关注度均处于历史峰值。</p>
+      </div>
+
+      <div class="analysis-card reveal reveal-d1">
+        <div class="analysis-tag red">规律分析</div>
+        <h3>历年必打的"民生老斧"</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="timeline-year">食品</span>
+            <span class="timeline-text">食品安全永恒主题，每届均有涉及，今年聚焦预制菜与生鲜掺假</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-year">医药</span>
+            <span class="timeline-text">虚假保健品违规直播带货每年必曝，老年群体受害尤甚</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-year">数字</span>
+            <span class="timeline-text">互联网平台权益自2018年稳定登场，杀熟与隐私成核心</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-year">出行</span>
+            <span class="timeline-text">新能源汽车维权接棒传统燃油车质量问题成新焦点</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-card wide reveal">
+        <div class="analysis-tag gold">⚡ AI综合研判结论</div>
+        <h3>2026年315晚会整体预判</h3>
+        <p>本轮预测模型综合评估认为：<strong>科技欺诈与民生食安</strong>将构成2026年315晚会的双主轴。AI诈骗议题的社会紧迫性与传播爆炸性使其几乎确定成为核心大戏；预制菜则是酝酿多年、时机成熟的"定时炸弹"。</p>
+        <p style="margin-top:14px;"><strong>值得注意的变量：</strong>监管部门播出前专项整治动向、各大平台是否主动整改，以及是否出现黑天鹅级别的新型消费丑闻，均可能改变最终呈现格局。</p>
+      </div>
+
+    </div>
+
+    <div class="disclaimer reveal">
+      <div class="disclaimer-icon">⚠</div>
+      <div class="disclaimer-text">
+        <strong style="color:var(--gold);display:block;margin-bottom:8px;font-size:11px;letter-spacing:3px;">免责声明 · DISCLAIMER</strong>
+        本页面内容为AI基于公开信息所作纯娱乐性预测，不代表任何官方媒体、监管机构立场。所有预测概率为模型估算，不构成事实陈述，亦不针对任何具体企业或个人。
+      </div>
+    </div>
+  </div>
+
+</div><!-- /wrapper -->
+
+<div class="sep"></div>
+
+<footer>
+  <div class="footer-logo">315</div>
+  <div class="footer-meta">
+    2026 · 消费者权益日 · <span>AI预测报告</span> · FOR ENTERTAINMENT ONLY
+  </div>
+</footer>
+
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<script>
+/* ── CUSTOM CURSOR (desktop only) ── */
+const isTouch = window.matchMedia('(hover: none)').matches;
+if (!isTouch) {
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  cursor.style.display = ring.style.display = 'block';
+  let mx = -100, my = -100, rx = -100, ry = -100;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  (function animCursor() {
+    cursor.style.left = mx - 4 + 'px';
+    cursor.style.top  = my - 4 + 'px';
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx - 16 + 'px';
+    ring.style.top  = ry - 16 + 'px';
+    requestAnimationFrame(animCursor);
+  })();
+}
+
+/* ── CANVAS PARTICLES (skip on low-end / battery saver) ── */
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canvas = document.getElementById('bg-canvas');
+if (!reducedMotion) {
+  const ctx = canvas.getContext('2d');
+  const COUNT = window.innerWidth < 480 ? 28 : 52; // fewer on phone
+
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+
+  const pts = Array.from({length: COUNT}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.26,
+    vy: (Math.random() - 0.5) * 0.26,
+    r:  Math.random() * 1.3 + 0.3,
+    a:  Math.random() * 0.32 + 0.07
+  }));
+
+  (function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pts.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > canvas.width)  p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,23,68,${p.a})`;
+      ctx.fill();
+    });
+    const linkDist = window.innerWidth < 480 ? 80 : 110;
+    for (let i = 0; i < pts.length; i++)
+      for (let j = i+1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d < linkDist) {
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = `rgba(255,23,68,${0.03 * (1 - d/linkDist)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    requestAnimationFrame(draw);
+  })();
+} else {
+  canvas.style.display = 'none';
+}
+
+/* ── SCROLL PROGRESS ── */
+const progressBar = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const total = document.body.scrollHeight - window.innerHeight;
+  progressBar.style.transform = `scaleX(${total > 0 ? window.scrollY / total : 0})`;
+}, { passive: true });
+
+/* ── INTERSECTION OBSERVER: reveal + prob bars ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    el.classList.add('visible');
+
+    el.querySelectorAll('.prob-fill[data-w], .card-prob-fill[data-w]').forEach((bar, i) => {
+      bar.style.width = (parseFloat(bar.dataset.w) * 100) + '%';
+      setTimeout(() => bar.classList.add('anim'), 200 + i * 80);
+    });
+
+    observer.unobserve(el);
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal, .featured-card, .grid-card, .analysis-card')
+  .forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
