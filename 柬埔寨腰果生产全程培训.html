@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>柬埔寨腰果生产全程培训手册</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #FAF6EF;
+  --warm: #FDF9F3;
+  --gold: #C8A45A;
+  --gold-deep: #9E7A2E;
+  --gold-light: #E8D5A0;
+  --green: #2D4A2A;
+  --green-mid: #4A7A43;
+  --green-light: #7AB870;
+  --brown: #5C3D1E;
+  --dark: #1A1208;
+  --mid: #4A3520;
+  --soft: #7A6040;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);font-family:'Noto Sans SC',sans-serif;color:var(--dark);overflow-x:hidden;}
+
+/* ══ SIDEBAR NAV ══ */
+.sidenav {
+  position:fixed; left:0; top:0; bottom:0; width:220px;
+  background:var(--green);
+  display:flex; flex-direction:column;
+  z-index:200; padding:0;
+  box-shadow:4px 0 20px rgba(0,0,0,0.25);
+}
+.sidenav-logo {
+  padding:28px 22px 20px;
+  border-bottom:1px solid rgba(200,164,90,0.2);
+}
+.sidenav-logo .brand {
+  font-family:'Noto Serif SC',serif;
+  font-size:13px; font-weight:700;
+  color:var(--gold); letter-spacing:1px;
+  line-height:1.4;
+}
+.sidenav-logo .sub {
+  font-size:10px; color:rgba(250,246,239,0.45);
+  letter-spacing:2px; margin-top:4px;
+}
+.sidenav-items { flex:1; padding:14px 0; overflow-y:auto; }
+.sidenav-item {
+  display:flex; align-items:center; gap:12px;
+  padding:13px 20px;
+  text-decoration:none;
+  color:rgba(250,246,239,0.6);
+  font-size:12.5px; font-weight:400;
+  letter-spacing:0.5px;
+  border-left:3px solid transparent;
+  transition:all 0.2s;
+}
+.sidenav-item:hover, .sidenav-item.active {
+  background:rgba(200,164,90,0.12);
+  color:var(--gold-light);
+  border-left-color:var(--gold);
+}
+.sidenav-item .num {
+  width:22px; height:22px; border-radius:50%;
+  background:rgba(200,164,90,0.15);
+  border:1px solid rgba(200,164,90,0.3);
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; color:var(--gold); font-weight:700;
+  flex-shrink:0;
+}
+.sidenav-footer {
+  padding:16px 20px;
+  border-top:1px solid rgba(200,164,90,0.15);
+  font-size:10px; color:rgba(250,246,239,0.3);
+  letter-spacing:1px; text-align:center;
+}
+
+/* ══ MAIN ══ */
+.main { margin-left:220px; }
+
+/* ══ HERO ══ */
+.hero {
+  min-height:100vh;
+  background:var(--green);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:80px 60px; text-align:center;
+  position:relative; overflow:hidden;
+}
+.hero::before {
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 80% 20%,rgba(200,164,90,0.15) 0%,transparent 70%),
+    radial-gradient(ellipse 50% 70% at 10% 80%,rgba(74,122,67,0.2) 0%,transparent 70%);
+}
+.hero-eyebrow {
+  font-size:10px; letter-spacing:6px; text-transform:uppercase;
+  color:var(--gold); margin-bottom:22px; position:relative;
+}
+.hero h1 {
+  font-family:'Noto Serif SC',serif;
+  font-size:clamp(48px,7vw,88px); font-weight:700;
+  color:var(--cream); line-height:1.08; position:relative;
+}
+.hero h1 em {
+  font-style:normal; color:var(--gold);
+  display:block; font-size:0.55em; font-weight:400; margin-top:10px;
+  font-family:'Noto Sans SC',sans-serif; letter-spacing:4px;
+}
+.hero-desc {
+  font-size:15px; color:rgba(250,246,239,0.55);
+  margin:26px auto 0; max-width:500px; line-height:1.9;
+  position:relative; font-weight:300;
+}
+.hero-rule { width:60px; height:2px; background:var(--gold); margin:36px auto; position:relative; }
+.hero-stats {
+  display:flex; gap:56px; position:relative;
+  flex-wrap:wrap; justify-content:center;
+}
+.hstat strong {
+  display:block; font-family:'Playfair Display',serif;
+  font-size:40px; color:var(--gold); line-height:1;
+}
+.hstat span { font-size:11px; letter-spacing:2px; color:rgba(250,246,239,0.45); margin-top:6px; display:block; }
+
+/* ══ MODULE WRAPPER ══ */
+.module { padding:0; }
+.module-header {
+  position:sticky; top:0; z-index:100;
+  background:var(--warm);
+  border-bottom:2px solid var(--gold-light);
+  padding:18px 60px;
+  display:flex; align-items:center; gap:16px;
+}
+.module-header .mod-num {
+  font-family:'Playfair Display',serif;
+  font-size:28px; color:var(--gold-deep); line-height:1;
+}
+.module-header .mod-title {
+  font-family:'Noto Serif SC',serif;
+  font-size:18px; font-weight:700; color:var(--green);
+}
+.module-header .mod-tag {
+  margin-left:auto; font-size:10px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--soft); font-weight:500;
+}
+.mod-body { padding:60px; max-width:1000px; }
+
+/* ══ TYPOGRAPHY ══ */
+.sec-label {
+  font-size:10px; letter-spacing:5px; text-transform:uppercase;
+  color:var(--gold-deep); font-weight:700; margin-bottom:14px;
+}
+h2.sec-title {
+  font-family:'Noto Serif SC',serif;
+  font-size:clamp(28px,4vw,44px); color:var(--green);
+  line-height:1.2; margin-bottom:18px;
+}
+.sec-lead {
+  font-size:15px; line-height:1.9; color:var(--mid);
+  font-weight:300; max-width:680px; margin-bottom:40px;
+}
+.gold-rule { width:48px; height:2px; background:var(--gold); margin:30px 0; }
+
+/* ══ CARDS ══ */
+.card-grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:36px; }
+.card-grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:36px; }
+.card {
+  border:1px solid var(--gold-light); border-radius:4px;
+  padding:30px 24px; background:var(--warm);
+  position:relative; transition:transform 0.2s,box-shadow 0.2s;
+}
+.card:hover { transform:translateY(-3px); box-shadow:0 12px 32px rgba(45,74,42,0.1); }
+.card .c-icon { font-size:32px; margin-bottom:14px; display:block; }
+.card h4 { font-family:'Noto Serif SC',serif; font-size:16px; color:var(--green); margin-bottom:10px; }
+.card p { font-size:13px; line-height:1.85; color:var(--mid); }
+.card .c-num {
+  position:absolute; top:16px; right:18px;
+  font-family:'Playfair Display',serif; font-size:32px;
+  color:var(--gold-light); font-weight:700; line-height:1;
+}
+.card.dark {
+  background:var(--green); border-color:rgba(200,164,90,0.25);
+}
+.card.dark h4 { color:var(--gold-light); }
+.card.dark p { color:rgba(250,246,239,0.7); }
+
+/* ══ HIGHLIGHT BOX ══ */
+.highlight-box {
+  background:var(--green); border-radius:4px;
+  padding:40px 44px; color:var(--cream);
+  position:relative; overflow:hidden;
+  margin:36px 0;
+}
+.highlight-box::after {
+  content:'🌿'; position:absolute;
+  font-size:110px; bottom:-20px; right:-10px;
+  opacity:0.08;
+}
+.highlight-box h3 {
+  font-family:'Noto Serif SC',serif; font-size:22px;
+  color:var(--gold-light); margin-bottom:18px;
+}
+.highlight-box p { font-size:14px; line-height:1.9; opacity:0.8; margin-bottom:12px; }
+.kv-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
+.kv {
+  background:rgba(200,164,90,0.15);
+  border:1px solid rgba(200,164,90,0.3);
+  border-radius:3px; padding:8px 14px;
+  font-size:12px; color:var(--gold-light);
+}
+.kv strong { display:block; font-size:10px; letter-spacing:2px; color:var(--gold); margin-bottom:3px; }
+
+/* ══ TWO-COL LAYOUT ══ */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:start; }
+.two-col-wide { display:grid; grid-template-columns:1.3fr 1fr; gap:50px; align-items:start; }
+
+/* ══ PROVINCE TABLE ══ */
+.prov-list { margin-top:28px; }
+.prov-row {
+  display:flex; align-items:center; gap:14px;
+  padding:14px 0; border-bottom:1px solid var(--gold-light);
+}
+.prov-row:last-child { border-bottom:none; }
+.prov-rank {
+  font-family:'Playfair Display',serif; font-size:24px;
+  color:var(--gold-deep); width:32px; text-align:center; flex-shrink:0;
+}
+.prov-bar-wrap { flex:1; }
+.prov-name { font-size:14px; font-weight:600; color:var(--green); margin-bottom:6px; }
+.prov-bar-bg { height:6px; background:var(--gold-light); border-radius:3px; overflow:hidden; }
+.prov-bar { height:100%; background:linear-gradient(90deg,var(--green-mid),var(--gold)); border-radius:3px; }
+.prov-pct { font-size:13px; font-weight:700; color:var(--gold-deep); width:40px; text-align:right; flex-shrink:0; }
+
+/* ══ TIMELINE ══ */
+.timeline { margin-top:36px; position:relative; padding-left:40px; }
+.timeline::before {
+  content:''; position:absolute; left:12px; top:0; bottom:0;
+  width:2px; background:var(--gold-light);
+}
+.tl-item { position:relative; margin-bottom:28px; }
+.tl-dot {
+  position:absolute; left:-34px; top:2px;
+  width:16px; height:16px; border-radius:50%;
+  background:var(--gold); border:3px solid var(--cream);
+  box-shadow:0 0 0 2px var(--gold);
+}
+.tl-item h4 { font-family:'Noto Serif SC',serif; font-size:16px; color:var(--green); margin-bottom:6px; }
+.tl-item p { font-size:13px; line-height:1.8; color:var(--mid); }
+.tl-date { font-size:11px; letter-spacing:2px; color:var(--gold-deep); font-weight:600; margin-bottom:4px; }
+
+/* ══ VARIETY BLOCK ══ */
+.variety-hero {
+  background:var(--green); border-radius:4px; padding:44px;
+  display:grid; grid-template-columns:1fr 1.6fr; gap:40px; align-items:center;
+  margin-top:36px;
+}
+.v-left .big-num {
+  font-family:'Playfair Display',serif; font-size:80px;
+  color:var(--gold); line-height:1; display:block;
+}
+.v-left h3 { font-family:'Noto Serif SC',serif; font-size:26px; color:var(--gold-light); margin-bottom:10px; }
+.v-left p { font-size:13px; color:rgba(250,246,239,0.65); line-height:1.8; }
+.v-specs { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.v-spec {
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(200,164,90,0.22);
+  border-radius:3px; padding:16px;
+}
+.v-spec .lbl { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:5px; }
+.v-spec .val { font-size:13px; color:var(--cream); line-height:1.5; }
+
+/* ══ PROCESS FLOW ══ */
+.process-flow { display:grid; grid-template-columns:repeat(5,1fr); gap:0; margin-top:40px; position:relative; }
+.process-flow::before {
+  content:''; position:absolute; left:10%; right:10%; top:36px;
+  height:2px; background:var(--gold-light); z-index:0;
+}
+.pf-step { text-align:center; padding:0 10px; position:relative; }
+.pf-circle {
+  width:72px; height:72px; border-radius:50%;
+  background:var(--warm); border:2px solid var(--gold);
+  display:flex; align-items:center; justify-content:center;
+  font-size:26px; margin:0 auto 16px; position:relative; z-index:1;
+  transition:background 0.2s;
+}
+.pf-step:hover .pf-circle { background:var(--gold); }
+.pf-step h4 { font-family:'Noto Serif SC',serif; font-size:13.5px; color:var(--green); margin-bottom:6px; }
+.pf-step p { font-size:11.5px; color:var(--soft); line-height:1.65; }
+
+/* ══ GRADES TABLE ══ */
+.grades-wrap { overflow-x:auto; margin-top:36px; }
+table.gt {
+  width:100%; border-collapse:collapse; font-size:13px;
+}
+table.gt thead tr { background:var(--green); }
+table.gt th {
+  padding:14px 16px; text-align:left;
+  font-size:10px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--gold); font-weight:700;
+}
+table.gt td {
+  padding:14px 16px; border-bottom:1px solid var(--gold-light);
+  color:var(--mid); line-height:1.5;
+}
+table.gt tbody tr:hover td { background:rgba(200,164,90,0.06); }
+.gbadge {
+  display:inline-block; background:rgba(45,74,42,0.08);
+  border:1px solid var(--green-mid);
+  color:var(--green); padding:3px 10px;
+  border-radius:2px; font-weight:700; font-size:11.5px; letter-spacing:1px;
+}
+.stars { color:var(--gold-deep); letter-spacing:1px; }
+.tag-premium { background:rgba(200,164,90,0.15); border:1px solid var(--gold); color:var(--gold-deep); font-size:10px; letter-spacing:1.5px; padding:2px 8px; border-radius:2px; font-weight:700; }
+
+/* ══ CERT GRID ══ */
+.cert-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; margin-top:36px; }
+.cert-card {
+  display:flex; gap:18px; align-items:flex-start;
+  padding:26px; border:1px solid var(--gold-light);
+  border-radius:4px; background:var(--warm);
+  transition:transform 0.2s;
+}
+.cert-card:hover { transform:translateY(-2px); }
+.cert-icon-wrap {
+  width:48px; height:48px; border-radius:50%;
+  background:var(--green); display:flex;
+  align-items:center; justify-content:center;
+  font-size:22px; flex-shrink:0;
+}
+.cert-card h4 { font-family:'Noto Serif SC',serif; font-size:15px; color:var(--green); margin-bottom:6px; }
+.cert-card p { font-size:12.5px; line-height:1.75; color:var(--mid); }
+.cert-scope { display:inline-block; margin-top:8px; font-size:10px; letter-spacing:2px; color:var(--gold-deep); font-weight:700; }
+
+/* ══ NUTRITION ══ */
+.nut-bar { margin-bottom:18px; }
+.nut-bar .top { display:flex; justify-content:space-between; font-size:13px; color:var(--mid); margin-bottom:7px; }
+.nut-bar .top strong { color:var(--dark); font-weight:500; }
+.bar-bg { height:7px; background:var(--gold-light); border-radius:4px; overflow:hidden; }
+.bar-fill { height:100%; background:linear-gradient(90deg,var(--green-mid),var(--gold)); border-radius:4px; }
+
+/* ══ BENEFITS ══ */
+.benefit-list { margin-top:10px; }
+.bitem { display:flex; gap:14px; align-items:flex-start; margin-bottom:16px; }
+.bicon {
+  width:34px; height:34px; background:var(--green); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:15px; flex-shrink:0;
+}
+.btext strong { display:block; font-size:13.5px; font-weight:600; color:var(--dark); margin-bottom:3px; }
+.btext span { font-size:12.5px; color:var(--soft); line-height:1.65; }
+
+/* ══ LOGISTICS MAP ══ */
+.port-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; margin-top:36px; }
+.port-card {
+  border:1px solid var(--gold-light); border-radius:4px;
+  padding:28px 24px; background:var(--warm);
+}
+.port-card .pt { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-deep); font-weight:700; margin-bottom:8px; }
+.port-card h4 { font-family:'Noto Serif SC',serif; font-size:17px; color:var(--green); margin-bottom:10px; }
+.port-card p { font-size:13px; line-height:1.8; color:var(--mid); }
+.port-badge { display:inline-flex; align-items:center; gap:6px; margin-top:12px; background:rgba(45,74,42,0.08); border:1px solid var(--green-mid); color:var(--green); font-size:11px; font-weight:600; padding:5px 12px; border-radius:3px; }
+
+.export-doc { margin-top:32px; }
+.doc-item {
+  display:flex; gap:14px; align-items:center;
+  padding:14px 0; border-bottom:1px solid var(--gold-light);
+}
+.doc-item:last-child { border-bottom:none; }
+.doc-icon { font-size:22px; width:36px; text-align:center; }
+.doc-text strong { font-size:14px; color:var(--dark); font-weight:600; }
+.doc-text span { display:block; font-size:12px; color:var(--soft); margin-top:2px; }
+
+.market-flags { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+.flag-chip {
+  display:flex; align-items:center; gap:8px;
+  padding:8px 16px; background:var(--warm);
+  border:1px solid var(--gold-light); border-radius:3px;
+  font-size:13px; color:var(--mid); font-weight:500;
+}
+.flag-chip span { font-size:18px; }
+
+/* ══ CHECKLIST ══ */
+.checklist { list-style:none; margin-top:20px; }
+.checklist li {
+  display:flex; align-items:flex-start; gap:12px;
+  padding:10px 0; border-bottom:1px solid rgba(200,164,90,0.2);
+  font-size:13.5px; color:var(--mid); line-height:1.6;
+}
+.checklist li:last-child { border-bottom:none; }
+.checklist li::before {
+  content:'✓'; width:20px; height:20px; border-radius:50%;
+  background:var(--green); color:var(--gold-light);
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; font-weight:700; flex-shrink:0; margin-top:1px;
+}
+
+/* ══ INCOTERMS ══ */
+.inco-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:28px; }
+.inco-card {
+  background:var(--green); border-radius:4px; padding:20px 16px; text-align:center;
+}
+.inco-card .code { font-family:'Playfair Display',serif; font-size:26px; color:var(--gold); margin-bottom:8px; }
+.inco-card h5 { font-size:12px; color:var(--gold-light); margin-bottom:6px; font-family:'Noto Serif SC',serif; }
+.inco-card p { font-size:11px; color:rgba(250,246,239,0.55); line-height:1.6; }
+
+/* ══ REVIEW SECTION ══ */
+.review-wrap {
+  background:var(--green); margin:0; padding:70px 60px;
+}
+.review-wrap .sec-label { color:var(--gold); }
+.review-wrap h2 { color:var(--cream); }
+.review-wrap .sec-lead { color:rgba(250,246,239,0.6); }
+.quiz-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:36px; }
+.quiz-card {
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(200,164,90,0.22);
+  border-radius:4px; padding:26px; cursor:pointer;
+  transition:background 0.2s,border-color 0.2s;
+}
+.quiz-card:hover { background:rgba(200,164,90,0.1); border-color:var(--gold); }
+.quiz-card .qn { font-family:'Playfair Display',serif; font-size:26px; color:var(--gold); display:block; margin-bottom:10px; }
+.quiz-card p { font-size:12.5px; color:rgba(250,246,239,0.72); line-height:1.75; }
+
+/* ══ FOOTER ══ */
+footer {
+  background:var(--dark); padding:44px 60px; text-align:center;
+}
+footer .ft-logo { font-family:'Noto Serif SC',serif; font-size:18px; color:var(--gold); letter-spacing:2px; margin-bottom:10px; }
+footer p { font-size:11px; color:rgba(250,246,239,0.3); letter-spacing:1px; margin-top:5px; }
+footer .ft-rule { width:40px; height:1px; background:var(--gold); margin:14px auto; }
+
+/* ══ SEPARATOR ══ */
+.mod-sep { height:2px; background:linear-gradient(90deg,var(--gold-light),transparent); margin:0 0 0 220px; }
+
+@media(max-width:1100px){
+  .sidenav{display:none;}
+  .main{margin-left:0;}
+  .mod-sep{margin-left:0;}
+}
+@media(max-width:860px){
+  .mod-body{padding:40px 28px;}
+  .two-col,.two-col-wide,.variety-hero,.card-grid-3,.cert-grid,.port-grid,.quiz-grid{grid-template-columns:1fr;}
+  .process-flow{grid-template-columns:repeat(3,1fr);gap:16px;}
+  .process-flow::before{display:none;}
+  .inco-grid{grid-template-columns:repeat(2,1fr);}
+  .v-specs{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ SIDEBAR ═══════ -->
+<nav class="sidenav">
+  <div class="sidenav-logo">
+    <div class="brand">KINGDOM HUB AGRO</div>
+    <div class="sub">腰果培训手册</div>
+  </div>
+  <div class="sidenav-items">
+    <a class="sidenav-item" href="#mod1"><span class="num">1</span>腰果树与产品</a>
+    <a class="sidenav-item" href="#mod2"><span class="num">2</span>柬埔寨种植</a>
+    <a class="sidenav-item" href="#mod3"><span class="num">3</span>腰果品种</a>
+    <a class="sidenav-item" href="#mod4"><span class="num">4</span>质量标准与认证</a>
+    <a class="sidenav-item" href="#mod5"><span class="num">5</span>腰果加工</a>
+    <a class="sidenav-item" href="#mod6"><span class="num">6</span>物流与出口</a>
+    <a class="sidenav-item" href="#review"><span class="num">★</span>知识回顾</a>
+  </div>
+  <div class="sidenav-footer">CASHEW NUT PRODUCTION<br>IN CAMBODIA</div>
+</nav>
+
+<!-- ═══════ MAIN ═══════ -->
+<div class="main">
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <p class="hero-eyebrow">Kingdom Hub Agro · 柬埔寨领先腰果出口商</p>
+  <h1>柬埔寨腰果生产<em>完整培训手册</em></h1>
+  <p class="hero-desc">七大模块 · 涵盖腰果树生态、种植实务、品种选择、国际标准、加工技术与出口物流的系统培训资料</p>
+  <div class="hero-rule"></div>
+  <div class="hero-stats">
+    <div class="hstat"><strong>50万+</strong><span>公顷种植面积</span></div>
+    <div class="hstat"><strong>全球前10</strong><span>腰果生产国</span></div>
+    <div class="hstat"><strong>3月—5月</strong><span>年度主采收季</span></div>
+    <div class="hstat"><strong>$17/kg</strong><span>加工腰果最高价格</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     MODULE 1 · 腰果树与产品
+══════════════════════════════════════════════ -->
+<div class="mod-sep"></div>
+<div class="module" id="mod1">
+  <div class="module-header">
+    <span class="mod-num">01</span>
+    <span class="mod-title">腰果树与产品</span>
+    <span class="mod-tag">Cashew Tree & Its Products</span>
+  </div>
+  <div class="mod-body">
+    <p class="sec-label">植物学基础</p>
+    <h2 class="sec-title">认识腰果树</h2>
+    <p class="sec-lead">腰果（学名：<em>Anacardium occidentale</em>）属漆树科热带常绿乔木，与漆树、芒果同科。原产于巴西东北部，16世纪由葡萄牙探险家引入印度、非洲和东南亚，如今已在全球热带地区广泛种植。</p>
+
+    <div class="two-col-wide">
+      <div>
+        <div class="highlight-box">
+          <h3>🌳 植物特征速览</h3>
+          <p>腰果树无需大量灌溉，能在贫瘠、排水良好的沙质土壤中旺盛生长，是典型的耐旱保土作物。传统品种树高可达14米，现代矮化嫁接品种通常控制在6米以内，方便采摘。嫁接苗第1—2年即可结果，3年进入经济产量期，树龄可达25—30年。</p>
+          <div class="kv-row">
+            <div class="kv"><strong>科属</strong>漆树科</div>
+            <div class="kv"><strong>原产地</strong>巴西东北部</div>
+            <div class="kv"><strong>适宜温度</strong>24°C – 28°C</div>
+            <div class="kv"><strong>年降水</strong>1200 – 2500mm</div>
+            <div class="kv"><strong>经济寿命</strong>25 – 30年</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="sec-label" style="margin-top:0">腰果的独特之处</p>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-date">🌸 开花期（11月—2月）</div>
+            <h4>花期与授粉</h4>
+            <p>腰果花小而密，靠蜜蜂授粉。每棵树可多轮开花，花期主要集中在旱季，有利于果实发育。</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-date">🍎 假果膨大（花后60天）</div>
+            <h4>腰果苹果形成</h4>
+            <p>花托膨大形成"腰果苹果"（假果），颜色由绿转为黄色或红色，代表成熟。维生素C含量约为柑橘的5倍。</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-date">🌰 真果（肾形坚果）</div>
+            <h4>腰果仁发育</h4>
+            <p>真正的腰果坚果（RCN）悬挂于假果底部，呈肾形。外有双层壳，夹层含有腰果酸——处理时需高温蒸制。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gold-rule"></div>
+    <p class="sec-label">六大可用部位</p>
+    <h2 class="sec-title" style="font-size:28px;">腰果树的全部产品</h2>
+    <div class="card-grid-3">
+      <div class="card">
+        <span class="c-num">01</span>
+        <span class="c-icon">🍎</span>
+        <h4>腰果苹果（假果）</h4>
+        <p>多汁芳香，可鲜食、榨汁，或发酵蒸馏为腰果酒（印度Feni）。因果皮薄不耐运输，欧美市场少见。维生素C极为丰富。</p>
+      </div>
+      <div class="card">
+        <span class="c-num">02</span>
+        <span class="c-icon">🥜</span>
+        <h4>腰果仁（可食种仁）</h4>
+        <p>核心出口商品。乳白色，口感细腻，风味温和偏甜。用于零食、烘焙、植物奶、素食乳酪及各类烹饪。</p>
+      </div>
+      <div class="card">
+        <span class="c-num">03</span>
+        <span class="c-icon">🛡️</span>
+        <h4>腰果壳液（CNSL）</h4>
+        <p>外壳夹层中的天然油脂，含腰果酸等活性成分，是皮肤刺激物。工业上用于油漆、润滑剂、摩擦材料。</p>
+      </div>
+      <div class="card">
+        <span class="c-num">04</span>
+        <span class="c-icon">🌱</span>
+        <h4>种皮（Testa）</h4>
+        <p>紧附于种仁的薄膜，富含多酚类抗氧化物和膳食纤维，是食品与健康领域的研究热点。</p>
+      </div>
+      <div class="card">
+        <span class="c-num">05</span>
+        <span class="c-icon">🌿</span>
+        <h4>腰果叶与树皮</h4>
+        <p>传统医学中用于抗菌消炎。嫩叶可作沙拉食用。树皮提取物具有辅助治疗消化系统疾病的潜力。</p>
+      </div>
+      <div class="card">
+        <span class="c-num">06</span>
+        <span class="c-icon">💧</span>
+        <h4>腰果油</h4>
+        <p>由碎粒仁压榨，富含油酸（单不饱和脂肪酸），与橄榄油中的"好脂肪"相似，适合烹饪与沙拉调味。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     MODULE 2 · 柬埔寨种植
+══════════════════════════════════════════════ -->
+<div class="mod-sep"></div>
+<div class="module" id="mod2">
+  <div class="module-header">
+    <span class="mod-num">02</span>
+    <span class="mod-title">柬埔寨种植</span>
+    <span class="mod-tag">Cultivation in Cambodia</span>
+  </div>
+  <div class="mod-body">
+    <p class="sec-label">种植现状</p>
+    <h2 class="sec-title">柬埔寨腰果产业概览</h2>
+    <p class="sec-lead">柬埔寨目前拥有超过50万公顷腰果种植面积，是全球前十大腰果生产国之一。腰果已成为继大米之后农村家庭的重要收入来源，主要由小农户经营，大型种植园数量正在增加。</p>
+
+    <div class="two-col">
+      <div>
+        <p class="sec-label">主产省份（种植面积占比）</p>
+        <div class="prov-list">
+          <div class="prov-row">
+            <div class="prov-rank">1</div>
+            <div class="prov-bar-wrap">
+              <div class="prov-name">磅同省 Kampong Thom</div>
+              <div class="prov-bar-bg"><div class="prov-bar" style="width:90%"></div></div>
+            </div>
+            <div class="prov-pct">27%</div>
+          </div>
+          <div class="prov-row">
+            <div class="prov-rank">2</div>
+            <div class="prov-bar-wrap">
+              <div class="prov-name">磅占省 Kampong Cham</div>
+              <div class="prov-bar-bg"><div class="prov-bar" style="width:66%"></div></div>
+            </div>
+            <div class="prov-pct">18%</div>
+          </div>
+          <div class="prov-row">
+            <div class="prov-rank">3</div>
+            <div class="prov-bar-wrap">
+              <div class="prov-name">腊塔纳基里省 Ratanakiri</div>
+              <div class="prov-bar-bg"><div class="prov-bar" style="width:62%"></div></div>
+            </div>
+            <div class="prov-pct">17%</div>
+          </div>
+          <div class="prov-row">
+            <div class="prov-rank">4</div>
+            <div class="prov-bar-wrap">
+              <div class="prov-name">桔井省 Kratie</div>
+              <div class="prov-bar-bg"><div class="prov-bar" style="width:50%"></div></div>
+            </div>
+            <div class="prov-pct">14%</div>
+          </div>
+          <div class="prov-row">
+            <div class="prov-rank">5</div>
+            <div class="prov-bar-wrap">
+              <div class="prov-name">蒙多基里省 Mondulkiri</div>
+              <div class="prov-bar-bg"><div class="prov-bar" style="width:30%"></div></div>
+            </div>
+            <div class="prov-pct">8%</div>
+          </div>
+          <div class="prov-row">
+            <div class="prov-rank">6</div>
+            <div class="prov-bar-wrap">
+              <div class="prov-name">其他省份（17个省）</div>
+              <div class="prov-bar-bg"><div class="prov-bar" style="width:59%"></div></div>
+            </div>
+            <div class="prov-pct">16%</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="highlight-box">
+          <h3>📅 年度农事历</h3>
+          <div class="kv-row" style="flex-direction:column;gap:8px;">
+            <div class="kv" style="width:100%"><strong>11月—2月</strong>旱季开始 · 花期（腰果树集中开花，蜜蜂授粉）</div>
+            <div class="kv" style="width:100%"><strong>3月初—5月末</strong>主采收季 · 腰果苹果成熟后手工采摘分离RCN</div>
+            <div class="kv" style="width:100%"><strong>3月中—4月中</strong>采收旺季 · 产量峰值期，价格相对较低</div>
+            <div class="kv" style="width:100%"><strong>6月—10月</strong>雨季休整 · 施肥剪枝，为下季花期准备</div>
+            <div class="kv" style="width:100%"><strong>全年</strong>加工出口 · 处理库存和上季存货</div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:18px;">
+          <span class="c-icon">🌱</span>
+          <h4>种植要素</h4>
+          <p>东北部地区的沙质微酸性红壤（pH 5.5–6.5）非常适合腰果生长，天然减少了化学投入的需求。腰果树高度耐旱，抗病虫能力强，是应对气候变化的理想农业转型作物。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gold-rule"></div>
+    <p class="sec-label">产业规模数据</p>
+    <div class="card-grid-3">
+      <div class="card dark">
+        <h4>📈 种植规模</h4>
+        <p>截至2024年，柬埔寨腰果种植面积已超 <strong style="color:var(--gold);font-size:18px;">50万公顷</strong>，跨越22个省份，小农户为主要生产者。</p>
+      </div>
+      <div class="card dark">
+        <h4>🌾 年产量</h4>
+        <p>年均原腰果（RCN）产量达 <strong style="color:var(--gold);font-size:18px;">60–80万吨</strong>，2021年峰值突破100万吨，产量仍在持续增长。</p>
+      </div>
+      <div class="card dark">
+        <h4>💰 价格参考</h4>
+        <p>农场生腰果售价约 <strong style="color:var(--gold);font-size:18px;">$1.6–$2/kg</strong>；经本地加工后，成品腰果仁最高可达 <strong style="color:var(--gold);">$17/kg</strong>。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     MODULE 3 · 腰果品种
+══════════════════════════════════════════════ -->
+<div class="mod-sep"></div>
+<div class="module" id="mod3">
+  <div class="module-header">
+    <span class="mod-num">03</span>
+    <span class="mod-title">柬埔寨腰果品种</span>
+    <span class="mod-tag">Cashew Varieties Grown in Cambodia</span>
+  </div>
+  <div class="mod-body">
+    <p class="sec-label">品种选择</p>
+    <h2 class="sec-title">主力品种：M23</h2>
+    <p class="sec-lead">柬埔寨种植的腰果品种以高产矮化品种为主，其中M23凭借卓越的产量表现和优秀的果仁品质，已成为柬埔寨出口市场的主力品种，约占全国腰果产量的70%。</p>
+
+    <div class="variety-hero">
+      <div class="v-left">
+        <span class="big-num">70%</span>
+        <h3>M23 · 主力出口品种</h3>
+        <p>M23是柬埔寨种植最广泛的腰果品种。以高产量、大果仁和极强的抗逆性著称，深受国际买家青睐。均匀的仁型和规整的尺寸使其在分级、包装和出口方面具有显著优势。</p>
+      </div>
+      <div class="v-specs">
+        <div class="v-spec"><div class="lbl">适宜温度</div><div class="val">24°C — 28°C<br>热带季风气候</div></div>
+        <div class="v-spec"><div class="lbl">年降水量</div><div class="val">1,200 – 2,500mm<br>高度耐旱</div></div>
+        <div class="v-spec"><div class="lbl">土壤要求</div><div class="val">pH 5.5–6.5<br>沙质/红壤 · 排水良好</div></div>
+        <div class="v-spec"><div class="lbl">最高产量</div><div class="val">可达 4吨/公顷<br>平均约 1.5吨/公顷</div></div>
+        <div class="v-spec"><div class="lbl">花期</div><div class="val">11月中旬—2月<br>可多轮开花</div></div>
+        <div class="v-spec"><div class="lbl">出粒率</div><div class="val">24 – 28%<br>大粒占比约15%</div></div>
+        <div class="v-spec"><div class="lbl">始果年龄</div><div class="val">嫁接苗第1–2年<br>3年进入经济产量期</div></div>
+        <div class="v-spec"><div class="lbl">核心优势</div><div class="val">仁型均匀，易于分级<br>适合机械化加工</div></div>
+      </div>
+    </div>
+
+    <div class="gold-rule"></div>
+    <p class="sec-label">品种比较</p>
+    <div class="card-grid-3">
+      <div class="card">
+        <span class="c-icon">🌳</span>
+        <h4>传统本地品种</h4>
+        <p>树形高大（可达14米），产量较低（约0.25吨/公顷），但风味独特，适应当地微气候。目前逐渐被矮化高产品种替代，仅在部分山区保留。</p>
+      </div>
+      <div class="card">
+        <span class="c-icon">🔬</span>
+        <h4>矮化嫁接品种（含M23）</h4>
+        <p>树高不超过6米，易于采摘；高产（平均1.5吨/公顷，最高4吨/公顷）；果仁均匀、出粒率高（24–28%）；抗旱、抗病虫能力强，是柬埔寨主推品种。</p>
+      </div>
+      <div class="card">
+        <span class="c-icon">🌱</span>
+        <h4>有机认证品种</h4>
+        <p>柬埔寨东北部有机农业区（磅同省等）种植，采用有机堆肥代替化学农药。出粒率和仁型与M23相近，但可申请EU Organic认证，市场溢价显著。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     MODULE 4 · 质量标准与认证
+══════════════════════════════════════════════ -->
+<div class="mod-sep"></div>
+<div class="module" id="mod4">
+  <div class="module-header">
+    <span class="mod-num">04</span>
+    <span class="mod-title">质量标准与认证</span>
+    <span class="mod-tag">Quality Standards & Certifications</span>
+  </div>
+  <div class="mod-body">
+    <p class="sec-label">等级体系</p>
+    <h2 class="sec-title">国际腰果等级（AFI标准）</h2>
+    <p class="sec-lead">国际腰果仁贸易遵循AFI（美国食品工业协会）等级标准，共分36个商业等级，按颜色和大小分类。掌握等级体系是采购、定价和商务谈判的核心基础。</p>
+
+    <div class="highlight-box" style="margin-bottom:0;">
+      <h3>💡 等级代码解读规则</h3>
+      <p><strong>字母前缀</strong>代表颜色等级：<strong>W</strong> = White（白色，最高价值）· <strong>SW</strong> = Scorched White（轻微焦色）· <strong>SS</strong> = Scorched（焦黄）· <strong>DW</strong> = Desert White（沙漠白）</p>
+      <p><strong>数字后缀</strong>代表每磅（453.59g）所含颗粒数。<strong>数字越小 = 颗粒越大 = 价值越高。</strong> 如WW180比WW320颗粒更大，价格更贵。</p>
+    </div>
+
+    <div class="grades-wrap">
+      <table class="gt">
+        <thead>
+          <tr>
+            <th>等级代码</th>
+            <th>中文名称</th>
+            <th>颗粒数/磅</th>
+            <th>典型尺寸</th>
+            <th>主要用途</th>
+            <th>价值星级</th>
+            <th>备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="gbadge">WW180</span></td>
+            <td>白色整仁·超大果</td>
+            <td>160–180粒</td>
+            <td>≥28mm</td>
+            <td>高端零售、礼品装</td>
+            <td class="stars">★★★★★</td>
+            <td><span class="tag-premium">最高溢价</span></td>
+          </tr>
+          <tr>
+            <td><span class="gbadge">WW210</span></td>
+            <td>白色整仁·特大果</td>
+            <td>190–210粒</td>
+            <td>27–28mm</td>
+            <td>精品零售市场</td>
+            <td class="stars">★★★★★</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><span class="gbadge">WW240</span></td>
+            <td>白色整仁·大果</td>
+            <td>220–240粒</td>
+            <td>26–27mm</td>
+            <td>零售·烘焙·植物奶</td>
+            <td class="stars">★★★★☆</td>
+            <td>欧洲零售主流</td>
+          </tr>
+          <tr>
+            <td><span class="gbadge">WW320</span></td>
+            <td>白色整仁·标准果</td>
+            <td>300–320粒</td>
+            <td>23–24mm</td>
+            <td>全球最畅销等级</td>
+            <td class="stars">★★★★☆</td>
+            <td><span class="tag-premium">出口主力</span></td>
+          </tr>
+          <tr>
+            <td><span class="gbadge">WW450</span></td>
+            <td>白色整仁·小果</td>
+            <td>400–450粒</td>
+            <td>20–22mm</td>
+            <td>零食加工·价格敏感市场</td>
+            <td class="stars">★★★☆☆</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><span class="gbadge">SW320</span></td>
+            <td>焦白整仁·标准</td>
+            <td>300–320粒</td>
+            <td>23–24mm</td>
+            <td>食品加工·工业原料</td>
+            <td class="stars">★★★☆☆</td>
+            <td>轻微焦色</td>
+          </tr>
+          <tr>
+            <td><span class="gbadge">SS320</span></td>
+            <td>焦黄整仁</td>
+            <td>300–320粒</td>
+            <td>—</td>
+            <td>工业加工用途</td>
+            <td class="stars">★★☆☆☆</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><span class="gbadge">Splits</span></td>
+            <td>对半碎仁</td>
+            <td>—</td>
+            <td>纵轴对半</td>
+            <td>烘焙·糕点·调味食品</td>
+            <td class="stars">★★☆☆☆</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><span class="gbadge">LWP</span></td>
+            <td>大块白碎</td>
+            <td>—</td>
+            <td>规则碎块</td>
+            <td>食品工业原料</td>
+            <td class="stars">★★☆☆☆</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><span class="gbadge">SWP</span></td>
+            <td>小块白碎</td>
+            <td>—</td>
+            <td>细碎</td>
+            <td>食品调味·粉末化</td>
+            <td class="stars">★☆☆☆☆</td>
+            <td>最低价值</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:11px;color:var(--soft);margin-top:12px;letter-spacing:1px;">※ 国际商业等级共36种，以上为最主要的交易等级。整仁（Whole）比碎仁（Pieces）有显著价格优势。</p>
+
+    <div class="gold-rule"></div>
+    <p class="sec-label">国际认证</p>
+    <h2 class="sec-title" style="font-size:28px;">主要认证体系</h2>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-icon-wrap">🌿</div>
+        <div>
+          <h4>EU Organic · 欧盟有机认证</h4>
+          <p>要求全程禁用化学农药和合成化肥，使用有机堆肥，建立内部控制体系（ICS），支持可追溯性。柬埔寨已有多个团体通过Ecocert认证，覆盖NOP（美国）、JAS（日本）和EOS（欧盟）标准。</p>
+          <span class="cert-scope">适用市场 → 欧盟 · 美国 · 日本</span>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon-wrap">🏭</div>
+        <div>
+          <h4>HACCP · 危害分析关键控制点</h4>
+          <p>覆盖加工全流程的食品安全管理体系，对生物、化学、物理危害进行系统分析，设定关键控制点。是进入欧盟、美国、日本等所有主要市场的基础性强制要求。</p>
+          <span class="cert-scope">进入国际市场的基础门槛</span>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon-wrap">♻️</div>
+        <div>
+          <h4>Fair Trade · 公平贸易认证</h4>
+          <p>确保农民获得公平价格，保障工人权益，支持社区可持续发展。在欧洲消费市场认知度极高，有助于打入道德消费群体，并可在包装上展示认证标志提升品牌溢价。</p>
+          <span class="cert-scope">适用市场 → 欧洲 · 北美高端零售</span>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon-wrap">✅</div>
+        <div>
+          <h4>ISO 22000 · 食品安全管理体系</h4>
+          <p>整合HACCP与GMP的国际标准，适用于整个食品供应链。是进入大型跨国超市（家乐福、沃尔玛等）和食品企业供应链的重要资质，也是采购商进行供应商评审的核心指标之一。</p>
+          <span class="cert-scope">进入跨国零售商供应链的关键</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     MODULE 5 · 腰果加工
+══════════════════════════════════════════════ -->
+<div class="mod-sep"></div>
+<div class="module" id="mod5">
+  <div class="module-header">
+    <span class="mod-num">05</span>
+    <span class="mod-title">腰果加工</span>
+    <span class="mod-tag">Cashew Processing</span>
+  </div>
+  <div class="mod-body">
+    <p class="sec-label">加工流程</p>
+    <h2 class="sec-title">从生果到成品：七道工序</h2>
+    <p class="sec-lead">由于腰果壳层含有腰果酸等毒性物质，整个处理过程必须严格遵循专业操作规范，以确保产品安全、品质达标并符合国际出口要求。</p>
+
+    <div class="process-flow">
+      <div class="pf-step">
+        <div class="pf-circle">🌱</div>
+        <h4>采收</h4>
+        <p>腰果苹果成熟后（约花后60天），手工采摘，分离底部RCN（生腰果），就地晾晒1–2天降低水分</p>
+      </div>
+      <div class="pf-step">
+        <div class="pf-circle">🔥</div>
+        <h4>高温蒸制</h4>
+        <p>将RCN置于蒸汽锅中蒸制，高温软化外壳，同时中和腰果酸，工人需佩戴防护手套和防护眼镜</p>
+      </div>
+      <div class="pf-step">
+        <div class="pf-circle">⚙️</div>
+        <h4>机械/手工去壳</h4>
+        <p>用专用刀具或半自动机械破壳取仁。技术水平直接决定整仁比例——整仁溢价显著高于碎仁</p>
+      </div>
+      <div class="pf-step">
+        <div class="pf-circle">✋</div>
+        <h4>剥除种皮</h4>
+        <p>手工剥除紧附于种仁外的薄膜（Testa）。熟练工人可在保持腰果仁完整的前提下高速完成</p>
+      </div>
+      <div class="pf-step">
+        <div class="pf-circle">☀️</div>
+        <h4>干燥</h4>
+        <p>热风烘干或太阳晾晒，将水分控制在≤5%，防止霉菌滋生，是保证保质期的关键工序</p>
+      </div>
+    </div>
+    <div class="process-flow" style="margin-top:24px;grid-template-columns:repeat(2,1fr);max-width:400px;">
+      <div class="pf-step">
+        <div class="pf-circle">🔍</div>
+        <h4>分级</h4>
+        <p>按AFI标准，依照颜色（白/焦）和尺寸（颗粒数/磅）严格分级，决定最终商品价值</p>
+      </div>
+      <div class="pf-step">
+        <div class="pf-circle">📦</div>
+        <h4>真空包装</h4>
+        <p>分级后充氮真空密封，一般采用10磅/25磅锡箔袋或真空袋，防止氧化、受潮，确保出口品质</p>
+      </div>
+    </div>
+
+    <div class="gold-rule"></div>
+    <div class="two-col">
+      <div>
+        <p class="sec-label">加工关键参数</p>
+        <div class="card-grid-2" style="margin-top:16px;">
+          <div class="card">
+            <h4>💧 水分控制</h4>
+            <p>成品水分≤5%（理想≤4%）。水分过高是霉菌污染（如黄曲霉毒素）的首要风险。每批货须检测水分含量。</p>
+          </div>
+          <div class="card">
+            <h4>⚠️ 腰果酸危害</h4>
+            <p>壳层中的腰果酸是强效皮肤刺激物。未经高温处理的腰果壳必须戴手套操作，绝不可直接接触皮肤。</p>
+          </div>
+          <div class="card">
+            <h4>🏆 整仁率</h4>
+            <p>去壳技术决定整仁率，整仁（WW系列）比碎仁（Pieces）价格高50%–100%。柬埔寨目前仍以半机械化加工为主。</p>
+          </div>
+          <div class="card">
+            <h4>🌡️ 储存条件</h4>
+            <p>成品须储存于干燥（相对湿度≤65%）、阴凉（温度10–20°C）、避光的仓库中。建议使用控温冷库延长保质期至24个月。</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="highlight-box">
+          <h3>🏭 柬埔寨本地加工现状</h3>
+          <p>目前柬埔寨本地加工能力仍十分有限，大部分RCN（生腰果）以原料形式出口至越南进行深加工。越南每年从柬埔寨进口约60%的腰果出口量，再以加工成品高价出售至欧美市场。</p>
+          <p>提升本地加工比例是柬埔寨腰果产业价值链升级的核心目标。磅同省等地已建立半机械化加工厂，Kingdom Hub Agro等企业正在推动从出口RCN向出口成品仁的转型。</p>
+          <div class="kv-row">
+            <div class="kv"><strong>本地加工能力</strong>约26,000吨RCN/年（截至2019）</div>
+            <div class="kv"><strong>认证工厂</strong>已获HACCP + Ecocert有机认证</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     MODULE 6 · 物流与出口
+══════════════════════════════════════════════ -->
+<div class="mod-sep"></div>
+<div class="module" id="mod6">
+  <div class="module-header">
+    <span class="mod-num">06</span>
+    <span class="mod-title">物流与出口</span>
+    <span class="mod-tag">Logistics & Exporting from Cambodia</span>
+  </div>
+  <div class="mod-body">
+    <p class="sec-label">出口通道</p>
+    <h2 class="sec-title">柬埔寨腰果出口物流体系</h2>
+    <p class="sec-lead">柬埔寨有两大国际港口，配合覆盖全国的公路干线，构成腰果出口的主要物流通道。了解港口能力和出口文件是顺利完成国际交货的必要条件。</p>
+
+    <div class="port-grid">
+      <div class="port-card">
+        <div class="pt">主要海港</div>
+        <h4>🚢 西哈努克港（PAS）</h4>
+        <p>柬埔寨唯一深水海港，位于暹罗湾沿岸，是国际货运的主要出口门户。2024年吞吐量突破100万TEU（同比增长29%）。港区设有集装箱堆场（21,800 TEU容量）、现代装卸设备及海关查验设施。距金边约230公里，需卡车陆运。</p>
+        <div class="port-badge">📦 FCL / LCL · 国际直达航线</div>
+      </div>
+      <div class="port-card">
+        <div class="pt">内河港口</div>
+        <h4>⚓ 金边港（PPAP）</h4>
+        <p>内河港，位于湄公河、洞里萨河和巴萨河交汇处。可接驳驳船经越南进入大洋港口转运，适合中小批量货物。对于来自内陆省份（磅同、桔井）的腰果，金边港可节省运输距离和成本。</p>
+        <div class="port-badge">🚤 驳船转运 · 灵活经济</div>
+      </div>
+    </div>
+
+    <div class="gold-rule"></div>
+    <div class="two-col">
+      <div>
+        <p class="sec-label">必备出口文件</p>
+        <div class="export-doc">
+          <div class="doc-item">
+            <div class="doc-icon">📄</div>
+            <div class="doc-text"><strong>商业发票（Commercial Invoice）</strong><span>记录买卖双方信息、货物描述、数量、单价及总价，是海关估价的核心依据</span></div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-icon">📦</div>
+            <div class="doc-text"><strong>装箱单（Packing List）</strong><span>详述每个包装箱的重量、尺寸和内容物，供进口海关核验</span></div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-icon">🚢</div>
+            <div class="doc-text"><strong>提单（Bill of Lading）</strong><span>海运货权凭证，分为正本提单（Original B/L）和电放提单（Telex Release），是买家提货的唯一凭证</span></div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-icon">🌿</div>
+            <div class="doc-text"><strong>植物检疫证书（Phytosanitary Certificate）</strong><span>由柬埔寨农业部出具，证明货物符合进口国植物卫生要求，农产品出口强制要求</span></div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-icon">📋</div>
+            <div class="doc-text"><strong>原产地证书（Certificate of Origin）</strong><span>FORM A（优惠关税证书）或普通C/O，享受ASEAN FTA或EBA（欧盟"除武器外一切"）税率优惠的必要文件</span></div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-icon">🔬</div>
+            <div class="doc-text"><strong>质量检验证书（Quality Certificate）</strong><span>由第三方机构（如SGS、Bureau Veritas）出具，证明货物等级、水分、黄曲霉毒素等符合买家规格</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="sec-label">主要出口目的地</p>
+        <div class="market-flags">
+          <div class="flag-chip"><span>🇻🇳</span>越南（最大市场，约60%）</div>
+          <div class="flag-chip"><span>🇨🇳</span>中国</div>
+          <div class="flag-chip"><span>🇯🇵</span>日本</div>
+          <div class="flag-chip"><span>🇰🇷</span>韩国</div>
+          <div class="flag-chip"><span>🇺🇸</span>美国</div>
+          <div class="flag-chip"><span>🇩🇪</span>德国</div>
+          <div class="flag-chip"><span>🇳🇱</span>荷兰</div>
+          <div class="flag-chip"><span>🇧🇩</span>孟加拉国</div>
+          <div class="flag-chip"><span>🇹🇼</span>台湾</div>
+          <div class="flag-chip"><span>🇦🇺</span>澳大利亚</div>
+          <div class="flag-chip"><span>🇨🇿</span>捷克</div>
+          <div class="flag-chip"><span>🇸🇬</span>新加坡</div>
+        </div>
+
+        <div class="gold-rule"></div>
+        <p class="sec-label" style="margin-top:0">国际贸易术语（Incoterms 2020）</p>
+        <div class="inco-grid">
+          <div class="inco-card">
+            <div class="code">FOB</div>
+            <h5>船上交货</h5>
+            <p>卖方负责货到装运港并装上船，之后风险转移买方。柬埔寨腰果出口最常用术语。</p>
+          </div>
+          <div class="inco-card">
+            <div class="code">CIF</div>
+            <h5>成本+保险+运费</h5>
+            <p>卖方负责运费和保险至目的港，适合买方对物流不熟悉的情况，卖方获取更多利润空间。</p>
+          </div>
+          <div class="inco-card">
+            <div class="code">CFR</div>
+            <h5>成本+运费</h5>
+            <p>类似CIF但不含保险，货物保险由买方自行安排，较CIF灵活。</p>
+          </div>
+          <div class="inco-card">
+            <div class="code">EXW</div>
+            <h5>工厂交货</h5>
+            <p>卖方在工厂/仓库交货，所有物流责任由买方承担，适合买方有强大物流能力的情况。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gold-rule"></div>
+    <p class="sec-label">柬埔寨贸易优势</p>
+    <ul class="checklist">
+      <li>享受欧盟EBA（Everything but Arms）协议，出口欧盟零关税，对欧出口有显著竞争优势</li>
+      <li>ASEAN自贸区成员，享受东盟内部优惠关税，出口至中国、日本、韩国、澳大利亚等关税降低</li>
+      <li>西哈努克港2024年新增港口吞吐能力，深水泊位可停靠大型货轮，直达欧洲和美洲</li>
+      <li>金边至西哈努克高速公路（190公里）已全线贯通，公路运输时间大幅缩短</li>
+      <li>柬埔寨政府简化出口程序，腰果出口许可证办理周期持续压缩</li>
+      <li>Kingdom Hub Agro与本地农户直接合作，供应链透明可追溯，满足欧美买家对供应链尽职调查的要求</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     REVIEW · 知识回顾
+══════════════════════════════════════════════ -->
+<div class="mod-sep"></div>
+<div class="review-wrap" id="review">
+  <p class="sec-label">培训总结</p>
+  <h2 class="sec-title" style="color:var(--cream);">七大模块知识回顾</h2>
+  <p class="sec-lead" style="color:rgba(250,246,239,0.55);">以下核心问答涵盖本次培训所有重点内容，建议学员在完成培训后逐一自测，确保掌握关键知识点。</p>
+
+  <div class="quiz-grid">
+    <div class="quiz-card">
+      <span class="qn">Q1</span>
+      <p><strong>腰果的"真果"和"假果"分别是什么？</strong><br>真果是肾形的腰果坚果（RCN），假果是膨大的花托（腰果苹果）。腰果仁来自真果，腰果苹果维生素C约为柑橘5倍但不耐运输。</p>
+    </div>
+    <div class="quiz-card">
+      <span class="qn">Q2</span>
+      <p><strong>等级代码WW320和WW240哪个价值更高？</strong><br>WW240价值更高。数字代表每磅颗粒数，数字越小颗粒越大，价格越高。WW240约为24–26mm大果，WW320是全球最畅销标准果。</p>
+    </div>
+    <div class="quiz-card">
+      <span class="qn">Q3</span>
+      <p><strong>为什么腰果去壳必须高温蒸制？</strong><br>腰果壳夹层中含腰果酸（Anacardic Acid），是强效皮肤刺激物，类似漆树毒油。高温蒸制可软化外壳便于去壳，同时中和腰果酸毒性，保护工人安全。</p>
+    </div>
+    <div class="quiz-card">
+      <span class="qn">Q4</span>
+      <p><strong>柬埔寨最大腰果产区在哪里？主要出口国是哪里？</strong><br>最大产区是磅同省（约27%），其次是磅占省（18%）和腊塔纳基里省（17%）。约60%的腰果出口至越南进行深加工，其余出口中国、日本、欧盟、美国等。</p>
+    </div>
+    <div class="quiz-card">
+      <span class="qn">Q5</span>
+      <p><strong>进入欧盟市场需要哪些核心认证？</strong><br>基础要求：HACCP食品安全认证；有机腰果须额外取得EU Organic（Ecocert）认证；大型超市供应商通常还需ISO 22000。此外出口需提供植物检疫证书和原产地证书（FORM A享优惠税率）。</p>
+    </div>
+    <div class="quiz-card">
+      <span class="qn">Q6</span>
+      <p><strong>M23品种有哪些核心优势？</strong><br>①高产（最高4吨/公顷，平均1.5吨）；②仁型均匀，适合机械化分级；③抗旱、抗病虫强；④出粒率24–28%，大粒占比约15%；⑤嫁接苗1–2年即可结果。</p>
+    </div>
+    <div class="quiz-card">
+      <span class="qn">Q7</span>
+      <p><strong>柬埔寨腰果采收季是什么时候？</strong><br>主采收季为每年3月初至5月末，采收旺季集中在3月中—4月中。花期在11月—2月（旱季）。全年可进行加工和出口，但受采收季影响，价格在旺季相对较低。</p>
+    </div>
+    <div class="quiz-card">
+      <span class="qn">Q8</span>
+      <p><strong>FOB和CIF贸易术语有何区别？</strong><br>FOB（船上交货）：卖方负责将货物装上指定港口的船，之后风险和费用由买方承担；CIF（成本+保险+运费）：卖方还需支付运费和保险至目的港，更多服务但报价更高。</p>
+    </div>
+    <div class="quiz-card">
+      <span class="qn">Q9</span>
+      <p><strong>腰果成品储存有哪些要求？</strong><br>水分≤5%（理想≤4%）；相对湿度≤65%；温度10–20°C；避光储存；真空充氮密封包装。水分过高是黄曲霉毒素污染的最大风险，每批货须检测水分和黄曲霉毒素含量。</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-logo">KINGDOM HUB AGRO</div>
+  <div class="ft-rule"></div>
+  <p>柬埔寨领先农产品出口企业 · 腰果 · 贡布椒 · 大米及优质农产品</p>
+  <p style="margin-top:6px;">本培训材料根据 kingdomhubagro.com 内容及公开资料整理，仅供内部培训使用</p>
+  <p style="margin-top:6px;">© 2025 Kingdom Hub Agro · All Rights Reserved</p>
+</footer>
+
+</div><!-- /main -->
+
+<script>
+// Active nav highlight on scroll
+const items = document.querySelectorAll('.sidenav-item');
+const sections = ['mod1','mod2','mod3','mod4','mod5','mod6','review'];
+window.addEventListener('scroll', () => {
+  const pos = window.scrollY + 120;
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if(el && el.offsetTop <= pos) current = id;
+  });
+  items.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+</body>
+</html>
