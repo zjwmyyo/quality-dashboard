@@ -24,6 +24,16 @@
       box-sizing: border-box;
     }
 
+    h1,
+    h2,
+    h3,
+    p,
+    span,
+    strong,
+    td {
+      overflow-wrap: anywhere;
+    }
+
     html {
       scroll-behavior: smooth;
     }
@@ -37,6 +47,7 @@
         radial-gradient(circle at 90% 18%, rgba(240, 180, 73, 0.18), transparent 30rem);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     a {
@@ -142,6 +153,7 @@
       color: #fffdf8;
       background: rgba(255, 253, 248, 0.12);
       transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+      text-align: center;
     }
 
     .btn:hover {
@@ -179,7 +191,7 @@
 
     .route-node {
       display: grid;
-      grid-template-columns: 82px 1fr;
+      grid-template-columns: 82px minmax(0, 1fr);
       gap: 12px;
       align-items: start;
       padding: 12px;
@@ -189,11 +201,13 @@
 
     .route-node strong {
       color: #fffdf8;
+      min-width: 0;
     }
 
     .route-node span {
       color: rgba(255, 253, 248, 0.78);
       font-size: 13px;
+      min-width: 0;
     }
 
     .app {
@@ -264,6 +278,7 @@
       color: var(--ink);
       background: #fff;
       cursor: pointer;
+      white-space: nowrap;
     }
 
     .tab[aria-selected="true"],
@@ -416,7 +431,7 @@
     .slot {
       position: relative;
       display: grid;
-      grid-template-columns: 74px 1fr;
+      grid-template-columns: 74px minmax(0, 1fr);
       gap: 12px;
       padding: 11px 0 11px 18px;
     }
@@ -443,11 +458,13 @@
     .slot strong {
       display: block;
       margin-bottom: 3px;
+      min-width: 0;
     }
 
     .slot span {
       color: var(--muted);
       font-size: 14px;
+      min-width: 0;
     }
 
     .grid-2,
@@ -666,7 +683,8 @@
       }
 
       .hero-inner {
-        padding-top: 96px;
+        padding-top: 82px;
+        gap: 20px;
       }
 
       .top-strip {
@@ -674,8 +692,8 @@
       }
 
       .toolbar {
-        position: static;
         grid-template-columns: 1fr;
+        top: 8px;
       }
 
       .section-head {
@@ -685,32 +703,214 @@
     }
 
     @media (max-width: 620px) {
+      body {
+        background:
+          linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(238, 245, 241, 0.98)),
+          radial-gradient(circle at 50% 0%, rgba(216, 240, 230, 0.8), transparent 24rem);
+      }
+
+      .hero {
+        min-height: 100svh;
+        align-items: start;
+      }
+
+      .hero::after {
+        background:
+          linear-gradient(180deg, rgba(17, 29, 34, 0.84), rgba(17, 29, 34, 0.58) 58%, rgba(17, 29, 34, 0.82)),
+          linear-gradient(90deg, rgba(17, 29, 34, 0.35), transparent);
+      }
+
       .hero-inner,
       .app,
       footer {
-        width: min(100% - 24px, 1180px);
+        width: calc(100% - 28px);
+        max-width: 1180px;
       }
 
       .hero-inner {
-        padding: 70px 0 30px;
+        padding: max(28px, env(safe-area-inset-top)) 0 20px;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 14px;
+      }
+
+      .hero-inner > * {
+        min-width: 0;
+        width: 100%;
+      }
+
+      .eyebrow {
+        max-width: 100%;
+        font-size: 12px;
+        line-height: 1.35;
       }
 
       h1 {
-        font-size: 42px;
+        margin: 14px 0 12px;
+        font-size: clamp(32px, 10vw, 40px);
+        line-height: 1.05;
+        max-width: 7.6em;
+      }
+
+      .lead {
+        font-size: 15px;
+        line-height: 1.55;
+        max-width: 100%;
+      }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .btn {
+        width: 100%;
+        min-height: 44px;
+      }
+
+      .route-panel {
+        width: 100%;
+        padding: 14px;
+      }
+
+      .route-panel h2 {
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+
+      .route-grid {
+        gap: 8px;
+      }
+
+      .route-node {
+        grid-template-columns: 46px minmax(0, 1fr);
+        gap: 9px;
+        padding: 9px 10px;
+      }
+
+      .route-node span {
+        font-size: 12px;
+        line-height: 1.45;
+        word-break: break-all;
+      }
+
+      .app {
+        margin-top: 14px;
+        margin-bottom: 42px;
       }
 
       .top-strip {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+      }
+
+      .stat {
+        min-height: 86px;
+        padding: 12px;
+      }
+
+      .stat small {
+        margin-bottom: 4px;
+      }
+
+      .stat strong {
+        font-size: 17px;
+        line-height: 1.25;
+      }
+
+      .toolbar {
+        margin-inline: -14px;
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+        padding: 10px 14px;
+        gap: 10px;
+        position: sticky;
+        top: 0;
+      }
+
+      .tabs,
+      .plan-switch {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+      }
+
+      .tabs::-webkit-scrollbar,
+      .plan-switch::-webkit-scrollbar {
+        display: none;
+      }
+
+      .tab,
+      .switch {
+        min-height: 40px;
+        padding: 9px 11px;
+        font-size: 14px;
+        flex: 0 0 auto;
+      }
+
+      .panel {
+        padding-top: 14px;
+      }
+
+      .section-head {
+        margin: 22px 0 14px;
+        gap: 8px;
+      }
+
+      .section-head h2 {
+        font-size: 28px;
+        line-height: 1.1;
+      }
+
+      .section-head p {
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .day-layout {
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .day-card,
+      .info-card,
+      .food-card,
+      .budget-card,
+      .source-card {
+        box-shadow: 0 8px 20px rgba(32, 48, 51, 0.08);
+      }
+
+      .day-card {
+        padding: 18px 16px 16px 18px;
+      }
+
+      .day-card h3 {
+        font-size: 24px;
+      }
+
+      .day-card p,
+      .info-card p,
+      .food-card p,
+      .budget-card p,
+      .source-card p {
+        font-size: 14px;
       }
 
       .slot {
-        grid-template-columns: 58px 1fr;
+        grid-template-columns: 56px minmax(0, 1fr);
         gap: 8px;
-        padding-left: 15px;
+        padding: 9px 0 9px 15px;
       }
 
       .timeline {
-        padding-left: 20px;
+        padding: 14px 12px 14px 19px;
       }
 
       .timeline::before {
@@ -723,16 +923,115 @@
 
       .day-meta {
         grid-template-columns: 1fr;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .mini {
+        min-height: auto;
+      }
+
+      .grid-2,
+      .grid-3 {
+        gap: 12px;
+      }
+
+      .info-card,
+      .food-card,
+      .budget-card,
+      .source-card {
+        padding: 16px;
+      }
+
+      .info-card h3,
+      .food-card h3,
+      .budget-card h3,
+      .source-card h3 {
+        font-size: 19px;
+      }
+
+      .route-map,
+      .route-map svg {
+        min-height: 270px;
+      }
+
+      .legend {
+        gap: 7px;
+      }
+
+      .chip {
+        max-width: 100%;
+        min-height: 32px;
+        white-space: normal;
+      }
+
+      .table,
+      .table tbody,
+      .table tr,
+      .table td {
+        display: block;
+        width: 100%;
       }
 
       .table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
+        border: 0;
+        background: transparent;
+        overflow: visible;
+      }
+
+      .table thead {
+        display: none;
+      }
+
+      .table tr {
+        margin-bottom: 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--paper);
+        overflow: hidden;
+      }
+
+      .table td {
+        display: grid;
+        grid-template-columns: 76px 1fr;
+        gap: 10px;
+        padding: 11px 12px;
+        white-space: normal;
+      }
+
+      .table td::before {
+        content: attr(data-label);
+        color: var(--ink);
+        font-weight: 760;
+      }
+
+      .food-list li,
+      .check-list li {
+        grid-template-columns: 22px 1fr;
+        padding: 9px;
+        font-size: 14px;
       }
 
       .slider-row {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 60px;
+        gap: 8px 10px;
+      }
+
+      .slider-row label {
+        grid-column: 1 / -1;
+      }
+
+      .slider-row input {
+        min-height: 32px;
+      }
+
+      .budget-total {
+        font-size: 40px;
+      }
+
+      footer {
+        margin-bottom: 24px;
+        font-size: 12px;
       }
     }
   </style>
@@ -1036,28 +1335,28 @@
         </thead>
         <tbody>
           <tr>
-            <td><strong>黄山北 -> 潮汕站</strong></td>
-            <td>G1601 直达高铁</td>
-            <td>约 11:25 发，17:00 后到</td>
-            <td>最稳。到站后直接网约车进潮州古城。</td>
+            <td data-label="段落"><strong>黄山北 -> 潮汕站</strong></td>
+            <td data-label="方式">G1601 直达高铁</td>
+            <td data-label="时间">约 11:25 发，17:00 后到</td>
+            <td data-label="建议">最稳。到站后直接网约车进潮州古城。</td>
           </tr>
           <tr>
-            <td><strong>潮州 -> 汕头</strong></td>
-            <td>网约车 / 城际动车</td>
-            <td>约 1-1.5 小时</td>
-            <td>两人以上网约车更省心；独行可用动车压成本。</td>
+            <td data-label="段落"><strong>潮州 -> 汕头</strong></td>
+            <td data-label="方式">网约车 / 城际动车</td>
+            <td data-label="时间">约 1-1.5 小时</td>
+            <td data-label="建议">两人以上网约车更省心；独行可用动车压成本。</td>
           </tr>
           <tr>
-            <td><strong>汕头 -> 潮汕站 -> 黄山北</strong></td>
-            <td>G1602 直达高铁</td>
-            <td>约 11:02 发，16:56 到</td>
-            <td>适合稳妥返程，周日不排远景点。</td>
+            <td data-label="段落"><strong>汕头 -> 潮汕站 -> 黄山北</strong></td>
+            <td data-label="方式">G1602 直达高铁</td>
+            <td data-label="时间">约 11:02 发，16:56 到</td>
+            <td data-label="建议">适合稳妥返程，周日不排远景点。</td>
           </tr>
           <tr>
-            <td><strong>揭阳潮汕机场 -> 杭州 -> 黄山北</strong></td>
-            <td>航班 + 高铁联程</td>
-            <td>看当日航班与 12306 晚间车</td>
-            <td>适合南澳半日，但转乘风险高，至少留 2 小时以上。</td>
+            <td data-label="段落"><strong>揭阳潮汕机场 -> 杭州 -> 黄山北</strong></td>
+            <td data-label="方式">航班 + 高铁联程</td>
+            <td data-label="时间">看当日航班与 12306 晚间车</td>
+            <td data-label="建议">适合南澳半日，但转乘风险高，至少留 2 小时以上。</td>
           </tr>
         </tbody>
       </table>
