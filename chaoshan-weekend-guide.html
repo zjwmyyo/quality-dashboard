@@ -1,0 +1,1382 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>黄山出发｜潮汕周五到周日三日游攻略</title>
+  <style>
+    :root {
+      --ink: #203033;
+      --muted: #617174;
+      --paper: #fffdf8;
+      --mist: #eef5f1;
+      --line: #d9e3dc;
+      --teal: #0b766f;
+      --mint: #d8f0e6;
+      --coral: #cc503c;
+      --amber: #f0b449;
+      --leaf: #577c45;
+      --night: #263746;
+      --shadow: 0 18px 48px rgba(32, 48, 51, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255, 253, 248, 0.94), rgba(238, 245, 241, 0.94)),
+        radial-gradient(circle at 10% 10%, rgba(216, 240, 230, 0.9), transparent 32rem),
+        radial-gradient(circle at 90% 18%, rgba(240, 180, 73, 0.18), transparent 30rem);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      overflow: hidden;
+      color: #fffdf8;
+      background: var(--night);
+      isolation: isolate;
+      display: grid;
+      align-items: end;
+    }
+
+    .hero canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: #20363d;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(17, 29, 34, 0.88), rgba(17, 29, 34, 0.46) 54%, rgba(17, 29, 34, 0.16)),
+        linear-gradient(0deg, rgba(17, 29, 34, 0.62), transparent 38%);
+    }
+
+    .hero-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 84px 0 42px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.72fr);
+      gap: 28px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      width: fit-content;
+      padding: 7px 12px;
+      border: 1px solid rgba(255, 253, 248, 0.28);
+      border-radius: 999px;
+      color: rgba(255, 253, 248, 0.88);
+      background: rgba(255, 253, 248, 0.08);
+      backdrop-filter: blur(10px);
+      font-size: 13px;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 20px 0 18px;
+      max-width: 760px;
+      font-size: clamp(42px, 7vw, 88px);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 720px;
+      color: rgba(255, 253, 248, 0.88);
+      font-size: clamp(17px, 2vw, 21px);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255, 253, 248, 0.3);
+      border-radius: 8px;
+      cursor: pointer;
+      color: #fffdf8;
+      background: rgba(255, 253, 248, 0.12);
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 253, 248, 0.18);
+      text-decoration: none;
+    }
+
+    .btn.primary {
+      color: #1d2d31;
+      background: var(--amber);
+      border-color: transparent;
+      font-weight: 760;
+    }
+
+    .route-panel {
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 253, 248, 0.28);
+      background: rgba(255, 253, 248, 0.1);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .route-panel h2 {
+      margin: 0 0 16px;
+      color: #fffdf8;
+      font-size: 22px;
+    }
+
+    .route-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .route-node {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.11);
+    }
+
+    .route-node strong {
+      color: #fffdf8;
+    }
+
+    .route-node span {
+      color: rgba(255, 253, 248, 0.78);
+      font-size: 13px;
+    }
+
+    .app {
+      width: min(1180px, calc(100% - 40px));
+      margin: -26px auto 72px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .top-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat {
+      min-height: 112px;
+      padding: 18px;
+      border-radius: 8px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 30px rgba(32, 48, 51, 0.08);
+    }
+
+    .stat small {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 22px;
+      line-height: 1.18;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 14px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 34px rgba(32, 48, 51, 0.08);
+      position: sticky;
+      top: 12px;
+      z-index: 10;
+    }
+
+    .tabs,
+    .plan-switch {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .tab,
+    .switch {
+      min-height: 38px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .tab[aria-selected="true"],
+    .switch.active {
+      color: #fffdf8;
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .panel {
+      display: none;
+      padding-top: 24px;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .section-head {
+      margin: 28px 0 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: end;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 44px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      max-width: 480px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .day-layout {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 18px;
+      margin-bottom: 18px;
+      align-items: stretch;
+    }
+
+    .day-card,
+    .info-card,
+    .food-card,
+    .budget-card,
+    .source-card {
+      border-radius: 8px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 14px 34px rgba(32, 48, 51, 0.08);
+    }
+
+    .day-card {
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .day-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 7px;
+      background: var(--coral);
+    }
+
+    .day-card[data-tone="teal"]::before {
+      background: var(--teal);
+    }
+
+    .day-card[data-tone="leaf"]::before {
+      background: var(--leaf);
+    }
+
+    .day-tag {
+      color: var(--coral);
+      font-weight: 780;
+      font-size: 14px;
+    }
+
+    .day-card[data-tone="teal"] .day-tag {
+      color: var(--teal);
+    }
+
+    .day-card[data-tone="leaf"] .day-tag {
+      color: var(--leaf);
+    }
+
+    .day-card h3 {
+      margin: 7px 0 10px;
+      font-size: clamp(24px, 3.6vw, 34px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .day-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .day-meta {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .mini {
+      padding: 12px;
+      border-radius: 8px;
+      background: var(--mist);
+      min-height: 82px;
+    }
+
+    .mini small {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .mini strong {
+      display: block;
+      line-height: 1.28;
+    }
+
+    .timeline {
+      padding: 18px 18px 18px 26px;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 23px;
+      top: 28px;
+      bottom: 28px;
+      width: 2px;
+      background: var(--line);
+    }
+
+    .slot {
+      position: relative;
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 12px;
+      padding: 11px 0 11px 18px;
+    }
+
+    .slot::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 20px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--amber);
+      border: 3px solid var(--paper);
+      box-shadow: 0 0 0 1px var(--line);
+    }
+
+    .time {
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .slot strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .slot span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .info-card,
+    .food-card,
+    .budget-card,
+    .source-card {
+      padding: 20px;
+    }
+
+    .info-card h3,
+    .food-card h3,
+    .budget-card h3,
+    .source-card h3 {
+      margin: 0 0 10px;
+      font-size: 21px;
+      letter-spacing: 0;
+    }
+
+    .info-card p,
+    .food-card p,
+    .budget-card p,
+    .source-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .route-map {
+      min-height: 360px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f9fbf6, #e8f3ee);
+    }
+
+    .route-map svg {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      display: block;
+    }
+
+    .legend {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 30px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex: none;
+    }
+
+    .dot.coral {
+      background: var(--coral);
+    }
+
+    .dot.amber {
+      background: var(--amber);
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 8px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+    }
+
+    .table th,
+    .table td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .table th {
+      color: var(--ink);
+      background: #edf5f0;
+      font-size: 13px;
+    }
+
+    .table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .table td {
+      color: var(--muted);
+    }
+
+    .table td strong {
+      color: var(--ink);
+    }
+
+    .food-list,
+    .check-list {
+      display: grid;
+      gap: 10px;
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .food-list li,
+    .check-list li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 10px;
+      border-radius: 8px;
+      background: #f6faf7;
+    }
+
+    .food-list input,
+    .check-list input {
+      width: 18px;
+      height: 18px;
+      margin-top: 3px;
+      accent-color: var(--teal);
+    }
+
+    .budget-card.output {
+      background: var(--night);
+      color: #fffdf8;
+    }
+
+    .budget-card.output p,
+    .budget-card.output small {
+      color: rgba(255, 253, 248, 0.76);
+    }
+
+    .budget-total {
+      margin: 12px 0 4px;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1;
+      font-weight: 820;
+      color: var(--amber);
+    }
+
+    .slider-row {
+      display: grid;
+      grid-template-columns: 112px 1fr 64px;
+      gap: 12px;
+      align-items: center;
+      margin-top: 14px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--coral);
+    }
+
+    .note {
+      padding: 14px;
+      border-radius: 8px;
+      background: #fff7df;
+      border: 1px solid #efd99b;
+      color: #5d4a16;
+    }
+
+    .small {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    footer {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto 34px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-inner,
+      .day-layout,
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-inner {
+        padding-top: 96px;
+      }
+
+      .top-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .toolbar {
+        position: static;
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .hero-inner,
+      .app,
+      footer {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .hero-inner {
+        padding: 70px 0 30px;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      .top-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .slot {
+        grid-template-columns: 58px 1fr;
+        gap: 8px;
+        padding-left: 15px;
+      }
+
+      .timeline {
+        padding-left: 20px;
+      }
+
+      .timeline::before {
+        left: 18px;
+      }
+
+      .slot::before {
+        left: -8px;
+      }
+
+      .day-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      .slider-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero" id="top">
+    <canvas id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">黄山北出发 · 潮州 + 汕头 · 周末可执行版</div>
+        <h1>潮汕周五、周六、周日三日游攻略</h1>
+        <p class="lead">按当前日期推算，本攻略对应 2026 年 5 月 29 日周五至 5 月 31 日周日。主方案选直达高铁，少折腾；备选方案用揭阳潮汕机场晚返，给南澳岛留半天。</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#itinerary">查看三日行程</a>
+          <a class="btn" href="#transport">先看交通取舍</a>
+          <a class="btn" href="#budget">预算与行李</a>
+        </div>
+      </div>
+
+      <aside class="route-panel" aria-label="路线摘要">
+        <h2>推荐路线</h2>
+        <div class="route-grid">
+          <div class="route-node">
+            <strong>周五</strong>
+            <span>黄山北乘 G1601 到潮汕站，傍晚进潮州古城，住牌坊街/广济门附近。</span>
+          </div>
+          <div class="route-node">
+            <strong>周六</strong>
+            <span>上午潮州古城，午后转汕头，小公园开埠区和海湾夜景，住汕头市区。</span>
+          </div>
+          <div class="route-node">
+            <strong>周日</strong>
+            <span>稳妥版上午返程；想多玩则走揭阳潮汕机场经杭州中转，增加南澳半日。</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="app">
+    <section class="top-strip" aria-label="关键指标">
+      <div class="stat">
+        <small>主交通</small>
+        <strong>直达高铁优先</strong>
+      </div>
+      <div class="stat">
+        <small>住宿安排</small>
+        <strong>1 晚潮州 + 1 晚汕头</strong>
+      </div>
+      <div class="stat">
+        <small>城市顺序</small>
+        <strong>潮州古城 -> 汕头老城</strong>
+      </div>
+      <div class="stat">
+        <small>订票提醒</small>
+        <strong>车次/航班以当天平台为准</strong>
+      </div>
+    </section>
+
+    <nav class="toolbar" aria-label="攻略导航">
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" aria-selected="true" data-panel="itinerary">行程总览</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="transport">交通住宿</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="food">美食清单</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="budget">预算行李</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="sources">地图来源</button>
+      </div>
+      <div class="plan-switch" aria-label="方案切换">
+        <button class="switch active" data-plan="train">稳妥高铁版</button>
+        <button class="switch" data-plan="late">晚返加玩版</button>
+      </div>
+    </nav>
+
+    <section class="panel active" id="itinerary">
+      <div class="section-head">
+        <h2>三天怎么走</h2>
+        <p>核心原则：第一天不要赶南澳，先把潮州夜景和老城吃透；第二天把潮州和汕头串起来；第三天按返程强度决定是否上岛。</p>
+      </div>
+
+      <article class="day-layout">
+        <div class="day-card">
+          <div class="day-tag">Day 1 · 5 月 29 日周五</div>
+          <h3>黄山北出发，傍晚进潮州古城</h3>
+          <p>第一天主打“顺利抵达 + 夜游潮州”。住宿放在牌坊街、广济门、开元寺一带，晚上步行解决，不再反复打车。</p>
+          <div class="day-meta">
+            <div class="mini">
+              <small>住宿</small>
+              <strong>潮州古城内或古城边</strong>
+            </div>
+            <div class="mini">
+              <small>晚餐</small>
+              <strong>牛肉火锅 / 砂锅粥 / 卤鹅</strong>
+            </div>
+          </div>
+        </div>
+        <div class="info-card timeline">
+          <div class="slot">
+            <div class="time">10:40</div>
+            <div><strong>到黄山北站</strong><span>预留取票、安检、午餐时间；若从黄山景区出发，建议更早动身。</span></div>
+          </div>
+          <div class="slot">
+            <div class="time">11:25</div>
+            <div><strong>G1601 黄山北 -> 潮汕</strong><span>参考到站约 17:00 后；订票前在 12306 复核余票、停站和票价。</span></div>
+          </div>
+          <div class="slot">
+            <div class="time">17:30</div>
+            <div><strong>潮汕站进潮州</strong><span>网约车约 30-45 分钟；轻装可直接先去酒店放行李。</span></div>
+          </div>
+          <div class="slot">
+            <div class="time">19:00</div>
+            <div><strong>古城夜游</strong><span>牌坊街、开元寺外街区、广济门、韩江夜景；广济桥灯光秀以当日公告为准。</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="day-layout">
+        <div class="day-card" data-tone="teal">
+          <div class="day-tag">Day 2 · 5 月 30 日周六</div>
+          <h3>上午潮州人文，下午转汕头开埠区</h3>
+          <p>这天别只排网红店。潮州看桥、寺、老街；汕头看小公园骑楼和海湾。中午后换城，节奏舒服。</p>
+          <div class="day-meta">
+            <div class="mini">
+              <small>转场</small>
+              <strong>潮州 -> 汕头约 1-1.5 小时</strong>
+            </div>
+            <div class="mini">
+              <small>住宿</small>
+              <strong>汕头小公园 / 万象城 / 海滨路周边</strong>
+            </div>
+          </div>
+        </div>
+        <div class="info-card timeline">
+          <div class="slot">
+            <div class="time">08:00</div>
+            <div><strong>潮州早餐</strong><span>粿汁、潮州肠粉、咸水粿、春卷，选酒店附近老店即可。</span></div>
+          </div>
+          <div class="slot">
+            <div class="time">09:00</div>
+            <div><strong>开元寺 + 牌坊街</strong><span>早上人少，适合慢走；买伴手礼别太早下手，先比价格。</span></div>
+          </div>
+          <div class="slot">
+            <div class="time">10:40</div>
+            <div><strong>广济桥 / 韩文公祠二选一</strong><span>想看标志性景观选广济桥；想避开人群选韩文公祠。</span></div>
+          </div>
+          <div class="slot">
+            <div class="time">14:30</div>
+            <div><strong>去汕头</strong><span>网约车最省心；预算敏感可公交到潮汕站再坐动车到汕头。</span></div>
+          </div>
+          <div class="slot">
+            <div class="time">16:30</div>
+            <div><strong>小公园开埠区</strong><span>中山纪念亭、老妈宫、汕头邮政总局旧址、骑楼街区，傍晚光线最好。</span></div>
+          </div>
+          <div class="slot">
+            <div class="time">19:30</div>
+            <div><strong>汕头晚餐 + 海湾夜景</strong><span>牛肉火锅、粿条汤、蚝烙、生腌任选；饭后去海滨路或西堤公园散步。</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="day-layout" id="day3Train">
+        <div class="day-card" data-tone="leaf">
+          <div class="day-tag">Day 3 · 5 月 31 日周日</div>
+          <h3>稳妥版：早午返程，不硬塞南澳</h3>
+          <p>如果周一要正常上班，这是更稳的方案。周日只留早餐和返程，把风险压低。</p>
+          <div class="day-meta">
+            <div class="mini">
+              <small>回程</small>
+              <strong>潮汕站 G1602 约 11:02 发车</strong>
+            </div>
+            <div class="mini">
+              <small>抵达</small>
+              <strong>黄山北约 16:56</strong>
+            </div>
+          </div>
+        </div>
+        <div class="info-card timeline">
+          <div class="slot">
+            <div class="time">07:30</div>
+            <div><strong>汕头早餐</strong><span>粿条汤、肠粉、豆花甜汤，选酒店附近，别跨城排队。</span></div>
+          </div>
+          <div class="slot">
+            <div class="time">08:40</div>
+            <div><strong>去潮汕站</strong><span>汕头市区到潮汕站建议预留 70-90 分钟，周末路况别压线。</span></div>
+          </div>
+          <div class="slot">
+            <div class="time">11:02</div>
+            <div><strong>G1602 潮汕 -> 黄山北</strong><span>车次时间可能调整，订票前以 12306 为准。</span></div>
+          </div>
+          <div class="slot">
+            <div class="time">16:56</div>
+            <div><strong>回到黄山北</strong><span>晚餐可回市区解决；这版体力消耗最低。</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="day-layout" id="day3Late" hidden>
+        <div class="day-card" data-tone="leaf">
+          <div class="day-tag">Day 3 · 5 月 31 日周日</div>
+          <h3>晚返版：南澳半日 + 揭阳潮汕机场转回</h3>
+          <p>适合不怕赶路、能接受联程不确定性的人。先确认航班和杭州东回黄山北的晚间高铁，再决定是否采用。</p>
+          <div class="day-meta">
+            <div class="mini">
+              <small>增加</small>
+              <strong>南澳岛青澳湾 / 北回归线广场</strong>
+            </div>
+            <div class="mini">
+              <small>风险</small>
+              <strong>航班延误会影响杭州中转</strong>
+            </div>
+          </div>
+        </div>
+        <div class="info-card timeline">
+          <div class="slot">
+            <div class="time">07:00</div>
+            <div><strong>汕头出发去南澳</strong><span>包车或网约车更稳；旺季和雨天上桥、进岛时间会明显变长。</span></div>
+          </div>
+          <div class="slot">
+            <div class="time">08:30</div>
+            <div><strong>青澳湾 + 北回归线广场</strong><span>只做半日打卡，不建议再绕全岛；留足返程缓冲。</span></div>
+          </div>
+          <div class="slot">
+            <div class="time">12:00</div>
+            <div><strong>离岛去揭阳潮汕机场</strong><span>从南澳到机场建议预留 2 小时以上，行李尽量随车。</span></div>
+          </div>
+          <div class="slot">
+            <div class="time">15:00 后</div>
+            <div><strong>揭阳潮汕机场 -> 杭州</strong><span>再从杭州东接回黄山北晚间车次；强烈建议不托运行李。</span></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel" id="transport">
+      <div class="section-head">
+        <h2>交通与住宿</h2>
+        <p>这份攻略不追求把三座城都打满，而是把周末时间花在最有辨识度的潮州和汕头。揭阳主要作为机场备选。</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="info-card route-map">
+          <svg viewBox="0 0 760 420" role="img" aria-label="黄山到潮汕路线示意图">
+            <defs>
+              <linearGradient id="sea" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#d8f0e6"/>
+                <stop offset="1" stop-color="#f8fbf7"/>
+              </linearGradient>
+              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#203033" flood-opacity="0.16"/>
+              </filter>
+            </defs>
+            <rect width="760" height="420" fill="url(#sea)"/>
+            <path d="M560 36 C602 82 610 126 650 166 C692 209 694 274 640 332 C594 382 520 390 474 344 C430 300 448 246 412 208 C374 168 374 112 418 70 C455 34 514 -6 560 36Z" fill="#cbe8e0"/>
+            <path d="M112 92 C180 58 234 74 292 118 C356 166 422 190 492 226" fill="none" stroke="#cc503c" stroke-width="8" stroke-linecap="round"/>
+            <path d="M492 226 C528 244 558 264 592 292" fill="none" stroke="#0b766f" stroke-width="7" stroke-linecap="round" stroke-dasharray="14 12"/>
+            <path d="M502 224 C535 202 570 190 612 178" fill="none" stroke="#f0b449" stroke-width="6" stroke-linecap="round"/>
+            <g filter="url(#softShadow)">
+              <circle cx="112" cy="92" r="22" fill="#cc503c"/>
+              <circle cx="492" cy="226" r="22" fill="#0b766f"/>
+              <circle cx="612" cy="178" r="22" fill="#f0b449"/>
+              <circle cx="592" cy="292" r="22" fill="#577c45"/>
+            </g>
+            <g font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" fill="#203033" font-weight="700">
+              <text x="66" y="54">黄山北</text>
+              <text x="452" y="192">潮汕站</text>
+              <text x="628" y="164">潮州</text>
+              <text x="606" y="326">汕头</text>
+            </g>
+            <g font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="13" fill="#617174">
+              <text x="126" y="136">直达高铁约 5.5 小时</text>
+              <text x="530" y="216">站到古城约 30-45 分钟</text>
+              <text x="505" y="316">汕头回潮汕站约 70-90 分钟</text>
+            </g>
+          </svg>
+          <div class="legend">
+            <span class="chip"><span class="dot coral"></span> 高铁主线</span>
+            <span class="chip"><span class="dot amber"></span> 潮州进城</span>
+            <span class="chip"><span class="dot"></span> 潮汕转汕头</span>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h3>为什么不把揭阳排成主游玩城市</h3>
+          <p>周五到周日时间太短，黄山到潮汕单程约半天。潮州古城和汕头老城已经足够撑起周末，揭阳更适合作为“机场/中转城市”。如果你特别想去揭阳，可把周六上午韩文公祠换成揭阳楼或进贤门，但会牺牲潮州完整度。</p>
+          <div class="note" style="margin-top:16px;">订票优先级：先抢去程 G1601 和回程 G1602；如果想加南澳，再查揭阳潮汕机场到杭州、杭州东到黄山北的联程时间。</div>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <h2>可选交通表</h2>
+        <p>时间为攻略制作时的参考口径，实际以 12306、航司和机场公告为准。</p>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>段落</th>
+            <th>推荐方式</th>
+            <th>参考时间</th>
+            <th>使用建议</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>黄山北 -> 潮汕站</strong></td>
+            <td>G1601 直达高铁</td>
+            <td>约 11:25 发，17:00 后到</td>
+            <td>最稳。到站后直接网约车进潮州古城。</td>
+          </tr>
+          <tr>
+            <td><strong>潮州 -> 汕头</strong></td>
+            <td>网约车 / 城际动车</td>
+            <td>约 1-1.5 小时</td>
+            <td>两人以上网约车更省心；独行可用动车压成本。</td>
+          </tr>
+          <tr>
+            <td><strong>汕头 -> 潮汕站 -> 黄山北</strong></td>
+            <td>G1602 直达高铁</td>
+            <td>约 11:02 发，16:56 到</td>
+            <td>适合稳妥返程，周日不排远景点。</td>
+          </tr>
+          <tr>
+            <td><strong>揭阳潮汕机场 -> 杭州 -> 黄山北</strong></td>
+            <td>航班 + 高铁联程</td>
+            <td>看当日航班与 12306 晚间车</td>
+            <td>适合南澳半日，但转乘风险高，至少留 2 小时以上。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="grid-3" style="margin-top:18px;">
+        <div class="info-card">
+          <h3>潮州住哪</h3>
+          <p>牌坊街、广济门、开元寺周边最方便。晚饭后步行夜游，不必再跨区打车。</p>
+        </div>
+        <div class="info-card">
+          <h3>汕头住哪</h3>
+          <p>小公园附近适合老城游；万象城/龙湖区餐饮选择多；海滨路看夜景方便。</p>
+        </div>
+        <div class="info-card">
+          <h3>行李策略</h3>
+          <p>只带 20 寸以内登机箱或双肩包。晚返加玩版尽量不托运，否则杭州转车风险会变大。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="food">
+      <div class="section-head">
+        <h2>美食清单</h2>
+        <p>潮汕吃法不必只追网红店。每一类选一家排队可接受的店，口味体验会比“跑店打卡”更舒服。</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="food-card">
+          <h3>潮州优先吃</h3>
+          <p>适合周五晚和周六早餐。</p>
+          <ul class="food-list">
+            <li><input type="checkbox" data-save="food-1"><span>牛肉火锅：胸口朥、匙柄、吊龙、牛肉丸</span></li>
+            <li><input type="checkbox" data-save="food-2"><span>粿汁或潮州肠粉：早餐就近吃，不专门跨城排队</span></li>
+            <li><input type="checkbox" data-save="food-3"><span>卤鹅：点拼盘更稳，配米饭或白粥</span></li>
+            <li><input type="checkbox" data-save="food-4"><span>鸭母捻 / 反沙芋头：甜品放夜游后</span></li>
+          </ul>
+        </div>
+
+        <div class="food-card">
+          <h3>汕头优先吃</h3>
+          <p>适合周六晚和周日早餐。</p>
+          <ul class="food-list">
+            <li><input type="checkbox" data-save="food-5"><span>粿条汤：周日早餐首选，速度快</span></li>
+            <li><input type="checkbox" data-save="food-6"><span>蚝烙：适合多人分食，别当唯一正餐</span></li>
+            <li><input type="checkbox" data-save="food-7"><span>生腌：肠胃敏感者跳过，别在返程前大量吃</span></li>
+            <li><input type="checkbox" data-save="food-8"><span>豆花 / 甘草水果：夜宵或饭后收尾</span></li>
+          </ul>
+        </div>
+
+        <div class="food-card">
+          <h3>伴手礼</h3>
+          <p>建议最后一天或周六晚统一买，别第一晚就提着走。</p>
+          <ul class="food-list">
+            <li><input type="checkbox" data-save="food-9"><span>腐乳饼、绿豆饼、老婆饼</span></li>
+            <li><input type="checkbox" data-save="food-10"><span>潮州单丛茶，小包装更适合送人</span></li>
+            <li><input type="checkbox" data-save="food-11"><span>牛肉丸需冷链，返程太久不建议大量买</span></li>
+            <li><input type="checkbox" data-save="food-12"><span>甘草水果现吃，不建议带回黄山</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="budget">
+      <div class="section-head">
+        <h2>预算与行李</h2>
+        <p>预算按一人估算。交通价格浮动最大，住宿次之；吃饭丰俭由人，但潮汕不需要靠高客单才能吃好。</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="budget-card output">
+          <h3>人均预算估算</h3>
+          <div class="budget-total" id="budgetTotal">¥1,360</div>
+          <p id="budgetText">按稳妥高铁版、2 人同行、普通住宿估算。</p>
+          <small>不含购物和不可控的航班改签成本。</small>
+        </div>
+        <div class="budget-card">
+          <h3>调整预算</h3>
+          <div class="slider-row">
+            <label for="people">同行人数</label>
+            <input id="people" type="range" min="1" max="4" value="2">
+            <strong><span id="peopleOut">2</span> 人</strong>
+          </div>
+          <div class="slider-row">
+            <label for="hotel">住宿档位</label>
+            <input id="hotel" type="range" min="180" max="520" step="20" value="280">
+            <strong>¥<span id="hotelOut">280</span></strong>
+          </div>
+          <div class="slider-row">
+            <label for="foodCost">餐饮档位</label>
+            <input id="foodCost" type="range" min="220" max="520" step="20" value="340">
+            <strong>¥<span id="foodOut">340</span></strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:18px;">
+        <div class="budget-card">
+          <h3>必带</h3>
+          <ul class="check-list">
+            <li><input type="checkbox" data-save="bag-1"><span>身份证、充电宝、雨伞或轻雨衣</span></li>
+            <li><input type="checkbox" data-save="bag-2"><span>透气鞋，古城石板路和小公园都适合走路</span></li>
+            <li><input type="checkbox" data-save="bag-3"><span>肠胃药，生腌和夜宵别硬撑</span></li>
+          </ul>
+        </div>
+        <div class="budget-card">
+          <h3>避坑</h3>
+          <ul class="check-list">
+            <li><input type="checkbox" data-save="avoid-1"><span>不要周日中午前排南澳，直达高铁会赶不上</span></li>
+            <li><input type="checkbox" data-save="avoid-2"><span>不要每餐都牛肉火锅，留胃给粿条和卤味</span></li>
+            <li><input type="checkbox" data-save="avoid-3"><span>不要只看网红店，老城就近小店更省时间</span></li>
+          </ul>
+        </div>
+        <div class="budget-card">
+          <h3>订票顺序</h3>
+          <ul class="check-list">
+            <li><input type="checkbox" data-save="ticket-1"><span>先锁黄山北到潮汕去程</span></li>
+            <li><input type="checkbox" data-save="ticket-2"><span>再锁周日回程或晚返联程</span></li>
+            <li><input type="checkbox" data-save="ticket-3"><span>最后定两晚住宿，尽量可取消</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="sources">
+      <div class="section-head">
+        <h2>复核点与来源</h2>
+        <p>网页可离线完整打开，但车次、航班、灯光秀和天气属于会变的信息，出发前一天请重新核对。</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="source-card">
+          <h3>出发前一天必查</h3>
+          <ul class="check-list">
+            <li><input type="checkbox" data-save="verify-1"><span>12306：G1601、G1602 当天停站、余票、检票口和票价</span></li>
+            <li><input type="checkbox" data-save="verify-2"><span>潮州：广济桥开放、灯光秀、临时交通管制</span></li>
+            <li><input type="checkbox" data-save="verify-3"><span>汕头/南澳：大桥拥堵、雷雨、景区临时限流</span></li>
+            <li><input type="checkbox" data-save="verify-4"><span>晚返版：揭阳潮汕机场航班准点率和杭州东衔接车</span></li>
+          </ul>
+        </div>
+
+        <div class="source-card">
+          <h3>参考链接</h3>
+          <p>以下链接为制作攻略时参考，离线打开页面不依赖这些链接。</p>
+          <div class="legend" style="margin-top:14px;">
+            <a class="chip" href="https://www.12306.cn/index/" target="_blank" rel="noreferrer">12306 官方订票</a>
+            <a class="chip" href="https://trains.ctrip.com/TrainSchedule/G1601/" target="_blank" rel="noreferrer">G1601 时刻参考</a>
+            <a class="chip" href="https://www.ailieche.com/g1602/" target="_blank" rel="noreferrer">G1602 时刻参考</a>
+            <a class="chip" href="https://www.chaozhou.gov.cn/" target="_blank" rel="noreferrer">潮州市政府</a>
+            <a class="chip" href="https://www.shantou.gov.cn/" target="_blank" rel="noreferrer">汕头市政府</a>
+            <a class="chip" href="https://www.shantou.gov.cn/cnst/ywdt/content/post_1312982.html" target="_blank" rel="noreferrer">小公园官方介绍</a>
+            <a class="chip" href="https://www.csair.com/" target="_blank" rel="noreferrer">航司/机场复核</a>
+          </div>
+          <p class="small" style="margin-top:14px;">提示：本页没有外链脚本、外链图片或字体；保存这一个 HTML 文件即可离线查看。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    生成时间：2026-05-28。适合从安徽黄山出发的周末轻量潮汕行，实际订票和营业信息请以当天官方平台为准。
+  </footer>
+
+  <script>
+    (function () {
+      const canvas = document.getElementById("heroCanvas");
+      const ctx = canvas.getContext("2d");
+      const state = { t: 0, dpr: Math.max(1, window.devicePixelRatio || 1) };
+
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = Math.max(1, Math.floor(rect.width * state.dpr));
+        canvas.height = Math.max(1, Math.floor(rect.height * state.dpr));
+        ctx.setTransform(state.dpr, 0, 0, state.dpr, 0, 0);
+      }
+
+      function drawBridge(w, h) {
+        const baseY = h * 0.66;
+        ctx.save();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = "rgba(255, 253, 248, 0.76)";
+        ctx.beginPath();
+        ctx.moveTo(w * 0.08, baseY);
+        ctx.quadraticCurveTo(w * 0.5, baseY - 42, w * 0.92, baseY);
+        ctx.stroke();
+
+        for (let i = 0; i < 13; i += 1) {
+          const x = w * 0.12 + i * (w * 0.76 / 12);
+          const top = baseY - 12 - Math.sin(i / 12 * Math.PI) * 34;
+          ctx.fillStyle = i % 2 ? "rgba(240, 180, 73, 0.82)" : "rgba(255, 253, 248, 0.7)";
+          ctx.fillRect(x - 7, top, 14, 54 + Math.sin(i / 12 * Math.PI) * 26);
+          ctx.beginPath();
+          ctx.moveTo(x - 16, top + 2);
+          ctx.lineTo(x, top - 13);
+          ctx.lineTo(x + 16, top + 2);
+          ctx.closePath();
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      function draw() {
+        const w = canvas.clientWidth || 1;
+        const h = canvas.clientHeight || 1;
+        const t = state.t;
+        ctx.clearRect(0, 0, w, h);
+
+        const bg = ctx.createLinearGradient(0, 0, w, h);
+        bg.addColorStop(0, "#18343b");
+        bg.addColorStop(0.48, "#24625f");
+        bg.addColorStop(1, "#c05d3d");
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, w, h);
+
+        ctx.fillStyle = "rgba(255, 253, 248, 0.18)";
+        ctx.beginPath();
+        ctx.arc(w * 0.8, h * 0.22, Math.min(w, h) * 0.13, 0, Math.PI * 2);
+        ctx.fill();
+
+        for (let layer = 0; layer < 3; layer += 1) {
+          ctx.beginPath();
+          const yBase = h * (0.74 + layer * 0.07);
+          ctx.moveTo(0, yBase);
+          for (let x = 0; x <= w + 12; x += 24) {
+            const y = yBase + Math.sin(x * 0.014 + t * (0.012 + layer * 0.004)) * (8 + layer * 3);
+            ctx.lineTo(x, y);
+          }
+          ctx.lineTo(w, h);
+          ctx.lineTo(0, h);
+          ctx.closePath();
+          ctx.fillStyle = ["rgba(216, 240, 230, 0.34)", "rgba(11, 118, 111, 0.28)", "rgba(32, 48, 51, 0.38)"][layer];
+          ctx.fill();
+        }
+
+        drawBridge(w, h);
+
+        ctx.strokeStyle = "rgba(255, 253, 248, 0.22)";
+        ctx.lineWidth = 1;
+        for (let i = 0; i < 6; i += 1) {
+          const x = (i / 5) * w;
+          ctx.beginPath();
+          ctx.moveTo(x, h * 0.06);
+          ctx.lineTo(x + Math.sin(t * 0.005 + i) * 12, h * 0.88);
+          ctx.stroke();
+        }
+
+        state.t += 1;
+        requestAnimationFrame(draw);
+      }
+
+      resize();
+      draw();
+      window.addEventListener("resize", resize);
+
+      const tabs = Array.from(document.querySelectorAll(".tab"));
+      const panels = Array.from(document.querySelectorAll(".panel"));
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const target = tab.dataset.panel;
+          tabs.forEach((item) => item.setAttribute("aria-selected", String(item === tab)));
+          panels.forEach((panel) => panel.classList.toggle("active", panel.id === target));
+          document.getElementById(target).scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      const switches = Array.from(document.querySelectorAll(".switch"));
+      const trainDay = document.getElementById("day3Train");
+      const lateDay = document.getElementById("day3Late");
+      switches.forEach((button) => {
+        button.addEventListener("click", () => {
+          const late = button.dataset.plan === "late";
+          switches.forEach((item) => item.classList.toggle("active", item === button));
+          trainDay.hidden = late;
+          lateDay.hidden = !late;
+          updateBudget();
+        });
+      });
+
+      const people = document.getElementById("people");
+      const hotel = document.getElementById("hotel");
+      const food = document.getElementById("foodCost");
+      const peopleOut = document.getElementById("peopleOut");
+      const hotelOut = document.getElementById("hotelOut");
+      const foodOut = document.getElementById("foodOut");
+      const budgetTotal = document.getElementById("budgetTotal");
+      const budgetText = document.getElementById("budgetText");
+
+      function yuan(value) {
+        return "¥" + Math.round(value).toLocaleString("zh-CN");
+      }
+
+      function updateBudget() {
+        const p = Number(people.value);
+        const h = Number(hotel.value);
+        const f = Number(food.value);
+        const late = document.querySelector(".switch.active").dataset.plan === "late";
+        const train = late ? 1180 : 820;
+        const local = late ? 260 : 160;
+        const roomShare = p === 1 ? 2 : 1;
+        const total = train + local + f + h * roomShare;
+        peopleOut.textContent = p;
+        hotelOut.textContent = h;
+        foodOut.textContent = f;
+        budgetTotal.textContent = yuan(total);
+        budgetText.textContent = late
+          ? "按晚返加玩版、" + p + " 人同行、含航班联程溢价估算。"
+          : "按稳妥高铁版、" + p + " 人同行、普通住宿估算。";
+      }
+
+      [people, hotel, food].forEach((input) => input.addEventListener("input", updateBudget));
+      updateBudget();
+
+      document.querySelectorAll("input[type='checkbox'][data-save]").forEach((box) => {
+        const key = "chaoshan-guide-" + box.dataset.save;
+        box.checked = localStorage.getItem(key) === "1";
+        box.addEventListener("change", () => {
+          localStorage.setItem(key, box.checked ? "1" : "0");
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
