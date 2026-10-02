@@ -1,0 +1,12 @@
+{
+  "name": "ai-passport-qqmusic-server",
+  "version": "1.0.0",
+  "description": "QQ 音乐播放器后端：扫码登录 + 我的歌单 + MP3 流代理，供 FoloToy AI Passport 固件使用",
+  "main": "src/index.js",
+  "scripts": { "start": "node src/index.js" },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@yakult-green-tea/qq-music-api": "^3.1.2"
+  },
+  "license": "MIT"
+}

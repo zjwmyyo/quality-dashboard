@@ -1,0 +1,23 @@
+menu "QQ Music Player"
+    config QQM_WIFI_SSID
+        string "Wi-Fi 名称 (SSID)"
+        default ""
+        help
+            AI Passport 要连接的 2.4GHz Wi-Fi 名称，需与运行后端的电脑同一局域网。
+
+    config QQM_WIFI_PASSWORD
+        string "Wi-Fi 密码"
+        default ""
+
+    config QQM_SERVER_URL
+        string "后端服务器地址"
+        default "http://192.168.1.100:3200"
+        help
+            运行 qqmusic-passport 后端的电脑地址，启动后端时屏幕/终端会打印局域网地址。
+            格式 http://IP:端口，不要带末尾斜杠。
+
+    config QQM_VOLUME
+        int "播放音量 (0-100)"
+        default 70
+        range 0 100
+endmenu

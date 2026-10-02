@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Passport · QQ 音乐登录</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+         background: linear-gradient(160deg, #0f1115 0%, #1c2333 100%); color: #e8ecf4;
+         min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .card { background: #181d28; border: 1px solid #2a3245; border-radius: 20px;
+          padding: 32px 28px; width: 100%; max-width: 380px; text-align: center;
+          box-shadow: 0 20px 60px rgba(0,0,0,.45); }
+  .logo { font-size: 15px; letter-spacing: 2px; color: #7d8aa3; margin-bottom: 4px; }
+  h1 { font-size: 22px; margin-bottom: 20px; font-weight: 600; }
+  .qr-wrap { width: 232px; height: 232px; margin: 0 auto 16px; background: #fff;
+             border-radius: 14px; display: flex; align-items: center; justify-content: center;
+             position: relative; overflow: hidden; }
+  .qr-wrap img { width: 216px; height: 216px; image-rendering: pixelated; }
+  .mask { position: absolute; inset: 0; background: rgba(15,17,21,.92); color: #cfd8ea;
+          display: none; flex-direction: column; align-items: center; justify-content: center;
+          gap: 12px; font-size: 15px; padding: 16px; text-align: center; }
+  .mask button { background: #3b82f6; border: 0; color: #fff; font-size: 14px;
+                 padding: 9px 20px; border-radius: 999px; cursor: pointer; }
+  .status { font-size: 15px; color: #aab6cc; min-height: 24px; margin-bottom: 6px; }
+  .ok { color: #34d399; }
+  .hint { font-size: 12.5px; color: #6b7790; line-height: 1.7; margin-top: 14px;
+          border-top: 1px solid #2a3245; padding-top: 14px; text-align: left; }
+  code { background: #0f1320; padding: 2px 7px; border-radius: 6px; color: #7dd3fc; font-size: 12px; }
+  .logout { margin-top: 16px; background: none; border: 1px solid #39415a; color: #9aa6bd;
+            font-size: 13px; padding: 7px 18px; border-radius: 999px; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">AI PASSPORT · QQ MUSIC</div>
+  <h1 id="title">扫码登录 QQ 音乐</h1>
+  <div class="qr-wrap">
+    <img id="qr" alt="登录二维码" src="/api/qrcode/image?t=0">
+    <div class="mask" id="mask">
+      <span id="maskText">二维码已过期</span>
+      <button onclick="refreshQr()">刷新二维码</button>
+    </div>
+  </div>
+  <div class="status" id="status">请使用 <b>QQ 音乐 App</b> 扫码并确认授权</div>
+  <button class="logout" id="logoutBtn" style="display:none" onclick="logout()">退出登录</button>
+  <div class="hint" id="hint">
+    1. 手机 QQ 音乐 App → 我的 → 右上角扫一扫<br>
+    2. 扫码后在手机上点“确认登录”<br>
+    3. AI Passport 与本电脑连同一个 Wi-Fi，固件服务器地址填：<br>
+    &nbsp;&nbsp;&nbsp;<code id="host"></code><br>
+    登录凭证仅保存在本机，有效期约 90 天，过期重新扫码即可。
+  </div>
+</div>
+<script>
+  const qrImg = document.getElementById('qr');
+  const statusEl = document.getElementById('status');
+  const mask = document.getElementById('mask');
+  const maskText = document.getElementById('maskText');
+  const title = document.getElementById('title');
+  const logoutBtn = document.getElementById('logoutBtn');
+  document.getElementById('host').textContent = location.host;
+
+  function refreshQr() {
+    fetch('/api/qrcode/refresh', { method: 'POST' })
+      .then(() => { mask.style.display = 'none'; qrImg.src = '/api/qrcode/image?t=' + Date.now(); });
+  }
+  function logout() {
+    fetch('/api/logout', { method: 'POST' }).then(() => location.reload());
+  }
+  async function tick() {
+    try {
+      const r = await fetch('/api/qrcode/state');
+      const d = await r.json();
+      if (d.state === 'waiting') {
+        statusEl.innerHTML = '请使用 <b>QQ 音乐 App</b> 扫码并确认授权';
+        statusEl.className = 'status'; mask.style.display = 'none';
+      } else if (d.state === 'scanned') {
+        statusEl.textContent = '已扫码，请在手机上确认登录…';
+      } else if (d.state === 'expired') {
+        statusEl.textContent = '二维码已过期';
+        maskText.textContent = '二维码已过期'; mask.style.display = 'flex';
+      } else if (d.state === 'error') {
+        maskText.textContent = '获取二维码失败'; mask.style.display = 'flex';
+      } else if (d.state === 'confirmed') {
+        title.textContent = '登录成功';
+        statusEl.innerHTML = '已登录：<b>' + (d.nick || '') + '</b>，现在可以在 AI Passport 上播放音乐了';
+        statusEl.className = 'status ok';
+        mask.style.display = 'flex';
+        maskText.innerHTML = '登录成功';
+        mask.querySelector('button').style.display = 'none';
+        logoutBtn.style.display = 'inline-block';
+        return;
+      }
+    } catch (_) {}
+    setTimeout(tick, 1500);
+  }
+  tick();
+</script>
+</body>
+</html>

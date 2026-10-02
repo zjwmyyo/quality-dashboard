@@ -1,0 +1,8 @@
+server/data/
+server/node_modules/
+firmware/build/
+firmware/managed_components/
+firmware/sdkconfig
+firmware/sdkconfig.old
+*.log
+.DS_Store
